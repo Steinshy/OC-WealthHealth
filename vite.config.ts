@@ -1,11 +1,11 @@
-import react from '@vitejs/plugin-react'
-import { visualizer } from 'rollup-plugin-visualizer'
-import { defineConfig } from 'vite'
-import checker from 'vite-plugin-checker'
-import { VitePWA } from 'vite-plugin-pwa'
+import react from '@vitejs/plugin-react';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { defineConfig } from 'vite';
+import checker from 'vite-plugin-checker';
+import { VitePWA } from 'vite-plugin-pwa';
 
 export default defineConfig(({ mode }) => {
-  const basePath = process.env.VITE_BASE_PATH || '/'
+  const basePath = process.env.VITE_BASE_PATH || '/';
 
   const buildOptions = {
     target: 'esnext',
@@ -24,23 +24,27 @@ export default defineConfig(({ mode }) => {
     rollupOptions: {
       output: {
         manualChunks(id: string) {
-          if (id.includes('node_modules/react') || id.includes('node_modules/react-dom') || id.includes('node_modules/react-router-dom')) {
-            return 'vendor-react'
+          if (
+            id.includes('node_modules/react') ||
+            id.includes('node_modules/react-dom') ||
+            id.includes('node_modules/react-router-dom')
+          ) {
+            return 'vendor-react';
           }
           if (id.includes('node_modules/date-fns')) {
-            return 'vendor-utils'
+            return 'vendor-utils';
           }
-          return undefined
+          return undefined;
         },
       },
     },
-  }
+  };
 
   if (mode === 'production') {
     Object.assign(buildOptions, {
       sourcemap: false,
       manifest: true,
-    })
+    });
   }
 
   return {
@@ -79,7 +83,7 @@ export default defineConfig(({ mode }) => {
       tsconfigPaths: true,
     },
     server: {
-      host: true,
+      host: 'localhost',
       port: 5173,
       strictPort: true,
     },
@@ -91,5 +95,5 @@ export default defineConfig(({ mode }) => {
       host: 'localhost',
       port: 3000,
     },
-  }
-})
+  };
+});

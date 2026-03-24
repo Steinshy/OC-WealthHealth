@@ -1,0 +1,153 @@
+.search-container {
+  margin: 2rem 0 1rem;
+  max-width: 600px;
+  width: 100%;
+}
+
+.search-input {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-family: inherit;
+  font-size: 1rem;
+  padding: 0.75rem;
+  transition:
+    border-color 0.3s,
+    box-shadow 0.3s;
+  width: 100%;
+}
+
+.search-input:focus {
+  border-color: #4a90e2;
+  box-shadow: 0 0 0 3px rgb(74 144 226 / 10%);
+  outline: none;
+}
+
+.table-info {
+  color: #666;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  max-width: 100%;
+  width: 100%;
+}
+
+.employee-table {
+  background-color: white;
+  border-collapse: collapse;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgb(0 0 0 / 10%);
+  overflow: hidden;
+  width: 100%;
+}
+
+.employee-table thead {
+  background-color: #f8f9fa;
+  border-bottom: 2px solid #dee2e6;
+}
+
+.employee-table th {
+  color: #2c3e50;
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 1rem;
+  text-align: left;
+  user-select: none;
+}
+
+.employee-table th.sortable {
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.employee-table th.sortable:hover {
+  background-color: #e9ecef;
+}
+
+.employee-table td {
+  border-bottom: 1px solid #dee2e6;
+  color: #333;
+  font-size: 0.95rem;
+  padding: 1rem;
+}
+
+.employee-table tbody tr {
+  transition: background-color 0.2s;
+}
+
+.employee-table tbody tr:hover {
+  background-color: #f8f9fa;
+}
+
+.employee-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.employee-table .no-data {
+  color: #999;
+  font-weight: 500;
+  padding: 2rem !important;
+  text-align: center;
+}
+
+@media (width <= 1024px) {
+  .employee-table {
+    font-size: 0.9rem;
+  }
+
+  .employee-table th,
+  .employee-table td {
+    padding: 0.75rem;
+  }
+}
+
+@media (width <= 768px) {
+  .employee-table {
+    display: block;
+    font-size: 0.85rem;
+    overflow-x: auto;
+  }
+
+  .employee-table thead {
+    display: none;
+  }
+
+  .employee-table tbody {
+    display: block;
+  }
+
+  .employee-table tbody tr {
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+    display: block;
+    margin-bottom: 1rem;
+    overflow: hidden;
+  }
+
+  .employee-table tbody td {
+    border-bottom: 1px solid #dee2e6;
+    display: block;
+    padding: 0.75rem;
+    padding-left: 40%;
+    position: relative;
+    text-align: right;
+  }
+
+  .employee-table tbody td:last-child {
+    border-bottom: none;
+  }
+
+  .employee-table tbody td::before {
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+    content: attr(data-label);
+    font-weight: 600;
+    left: 0;
+    padding: 0.75rem;
+    position: absolute;
+    text-align: left;
+    width: 35%;
+  }
+
+  .search-container {
+    max-width: 100%;
+  }
+}
