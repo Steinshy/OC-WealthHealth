@@ -62,21 +62,25 @@ export const states: State[] = [
   { name: 'Wyoming', abbreviation: 'WY' },
 ];
 
-export const departments = [
-  'Sales',
-  'Marketing',
-  'Engineering',
-  'Human Resources',
-  'Legal',
-];
+export const departments = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'];
 
 export const getEmployees = (): Employee[] => {
   const data = localStorage.getItem('employees');
-  return data ? JSON.parse(data) : [];
+  if (!data) return [];
+  try {
+    return JSON.parse(data);
+  } catch {
+    console.error('Failed to parse employees from localStorage');
+    return [];
+  }
 };
 
 export const saveEmployee = (employee: Employee): void => {
   const employees = getEmployees();
-  employees.push(employee);
+  const newEmployee = {
+    ...employee,
+    id: crypto.randomUUID(),
+  };
+  employees.push(newEmployee);
   localStorage.setItem('employees', JSON.stringify(employees));
 };

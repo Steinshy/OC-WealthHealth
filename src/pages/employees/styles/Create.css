@@ -74,6 +74,18 @@ select:disabled {
   cursor: not-allowed;
 }
 
+.input-error {
+  border-color: #e74c3c !important;
+  box-shadow: 0 0 0 3px rgb(231 76 60 / 10%) !important;
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 0.85rem;
+  margin-bottom: -0.75rem;
+  margin-top: 0.25rem;
+}
+
 .submit-button {
   background-color: #27ae60;
   border: none;

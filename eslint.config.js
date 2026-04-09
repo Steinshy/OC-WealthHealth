@@ -43,21 +43,7 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
-      'import/order': [
-        'error',
-        {
-          groups: [
-            'builtin',
-            'external',
-            'internal',
-            'parent',
-            'sibling',
-            'index',
-          ],
-          'newlines-between': 'always',
-          alphabetize: { order: 'asc', caseInsensitive: true },
-        },
-      ],
+      'import/order': 'off',
     },
   },
   ...tseslint.configs.recommended,

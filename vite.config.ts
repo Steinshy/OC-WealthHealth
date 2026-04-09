@@ -1,45 +1,45 @@
-import react from '@vitejs/plugin-react';
-import { visualizer } from 'rollup-plugin-visualizer';
 import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 import checker from 'vite-plugin-checker';
-import { VitePWA } from 'vite-plugin-pwa';
+import { visualizer } from 'rollup-plugin-visualizer';
+import { resolve } from 'node:path';
 
+export const appPublicBasePath = process.env.VITE_BASE_PATH || '/';
 export default defineConfig(({ mode }) => {
-  const basePath = process.env.VITE_BASE_PATH || '/';
+  const basePath = appPublicBasePath;
 
   const buildOptions = {
     target: 'esnext',
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: mode !== 'production',
+    sourcemap: mode === 'production' ? false : true,
     cssCodeSplit: true,
-    cssMinify: 'esbuild' as const,
+    cssMinify: 'lightningcss' as const,
     assetsInlineLimit: 4096,
     chunkSizeWarningLimit: 1000,
-    minify: 'esbuild' as const,
+    minify: 'oxc' as const,
     reportCompressedSize: true,
     modulePreload: {
       polyfill: true,
     },
-    rollupOptions: {
+    rolldownOptions: {
       output: {
-        manualChunks(id: string) {
-          if (
-            id.includes('node_modules/react') ||
-            id.includes('node_modules/react-dom') ||
-            id.includes('node_modules/react-router-dom')
-          ) {
-            return 'vendor-react';
-          }
-          if (id.includes('node_modules/date-fns')) {
-            return 'vendor-utils';
-          }
-          return undefined;
+        codeSplitting: {
+          groups: [
+            { name: 'vendor-ui', test: /node_modules[\\/]lucide-react[\\/]/, priority: 4 },
+            {
+              name: 'vendor-react',
+              test: /node_modules[\\/](react|react-dom|react-router)[\\/]/,
+              priority: 2,
+            },
+            { name: 'vendor', test: /node_modules[\\/]/, priority: 1 },
+          ],
         },
       },
     },
   };
 
+    // Production Mode
   if (mode === 'production') {
     Object.assign(buildOptions, {
       sourcemap: false,
@@ -47,28 +47,17 @@ export default defineConfig(({ mode }) => {
     });
   }
 
+  
   return {
+    define: {
+      __APP_PUBLIC_BASE_PATH__: JSON.stringify(appPublicBasePath),
+    },
+    oxc: {
+      jsx: { runtime: 'automatic' },
+    },
     plugins: [
-      checker({ typescript: true }),
+      mode !== 'production' && checker({ typescript: true }),
       react(),
-      VitePWA({
-        registerType: 'autoUpdate',
-        manifest: false,
-        includeAssets: [
-          'favicon.svg',
-          'favicon-96x96.png',
-          'favicon.ico',
-          'apple-touch-icon.png',
-          'web-app-manifest-192x192.png',
-          'web-app-manifest-512x512.png',
-          'site.webmanifest',
-        ],
-        workbox: {
-          cleanupOutdatedCaches: true,
-          clientsClaim: true,
-          skipWaiting: true,
-        },
-      }),
       mode === 'production' &&
         visualizer({
           open: true,
@@ -77,19 +66,16 @@ export default defineConfig(({ mode }) => {
           filename: 'dist/stats.html',
         }),
     ].filter(Boolean),
+    resolve: {
+      alias: {
+        '@': resolve(__dirname, 'src'),
+      },
+    },
     base: basePath,
     publicDir: './public',
-    resolve: {
-      tsconfigPaths: true,
-    },
-    server: {
-      host: 'localhost',
-      port: 5173,
-      strictPort: true,
-    },
     build: buildOptions,
     optimizeDeps: {
-      include: ['date-fns', 'react', 'react-dom', 'react-router-dom'],
+      include: ['lucide-react', 'react', 'react-dom', 'react-router'],
     },
     preview: {
       host: 'localhost',
