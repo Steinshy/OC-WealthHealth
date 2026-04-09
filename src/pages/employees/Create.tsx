@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router';
 
 import { SuccessModal } from '@/components/Modal';
 import { validateEmployee } from '@/helpers/validator';
