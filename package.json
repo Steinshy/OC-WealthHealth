@@ -3,23 +3,27 @@
   "version": "1.0.0",
   "description": "HRnet employee management system",
   "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vite build",
+    "build": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vite build",
     "preview": "vite preview",
-    "type-check": "tsc --noEmit",
-    "lint": "eslint src",
-    "lint:fix": "eslint src --fix",
+    "type-check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
-    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
     "lighthouse": "lhci autorun"
   },
   "dependencies": {
+    "@steinshy/wealthhealth-modal": "^0.1.1",
     "lucide-react": "^1.8.0",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
-    "react-router": "^7.13.1"
+    "react-router": "^7.14.1"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -27,21 +31,21 @@
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.1",
-    "eslint": "^10.2.0",
+    "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-import": "^2.32.0",
-    "eslint-plugin-react-hooks": "^7.0.1",
+    "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
-    "prettier": "^3.8.1",
     "lighthouse": "^13.1.0",
+    "prettier": "^3.8.3",
     "rollup-plugin-visualizer": "^7.0.1",
-    "stylelint": "^17.6.0",
+    "stylelint": "^17.9.0",
     "stylelint-config-standard": "^40.0.0",
     "stylelint-order": "^8.0.0",
-    "typescript": "^6.0.2",
-    "typescript-eslint": "^8.58.1",
-    "vite": "^8.0.7",
-    "vite-plugin-checker": "^0.12.0"
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.0",
+    "vite": "^8.0.10",
+    "vite-plugin-checker": "^0.13.0"
   }
 }

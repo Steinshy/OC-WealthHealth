@@ -1,7 +1,9 @@
 node_modules
 dist
 build
+.cursor
 coverage
+.oc/**
 *.lock
 package-lock.json
 yarn.lock

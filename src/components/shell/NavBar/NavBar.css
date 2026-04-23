@@ -1,0 +1,8 @@
+.navbar {
+  margin: 1.5rem 0;
+  text-align: center;
+}
+
+.navbar .btn {
+  min-width: 200px;
+}

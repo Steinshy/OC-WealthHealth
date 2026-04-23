@@ -26,7 +26,11 @@ export default defineConfig(({ mode }) => {
       output: {
         codeSplitting: {
           groups: [
-            { name: 'vendor-ui', test: /node_modules[\\/]lucide-react[\\/]/, priority: 4 },
+            {
+              name: 'vendor-ui',
+              test: /node_modules[\\/]lucide-react[\\/]/,
+              priority: 4,
+            },
             {
               name: 'vendor-react',
               test: /node_modules[\\/](react|react-dom|react-router)[\\/]/,
@@ -39,7 +43,7 @@ export default defineConfig(({ mode }) => {
     },
   };
 
-    // Production Mode
+  // Production Mode
   if (mode === 'production') {
     Object.assign(buildOptions, {
       sourcemap: false,
@@ -47,8 +51,12 @@ export default defineConfig(({ mode }) => {
     });
   }
 
-  
   return {
+    server: {
+      port: 5173,
+      strictPort: true,
+      open: false,
+    },
     define: {
       __APP_PUBLIC_BASE_PATH__: JSON.stringify(appPublicBasePath),
     },

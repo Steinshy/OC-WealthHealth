@@ -39,7 +39,8 @@
     --accent-bg: rgb(192 132 252 / 15%);
     --accent-border: rgb(192 132 252 / 50%);
     --social-bg: rgb(47 48 58 / 50%);
-    --shadow: rgb(0 0 0 / 40%) 0 10px 15px -3px, rgb(0 0 0 / 25%) 0 4px 6px -2px;
+    --shadow:
+      rgb(0 0 0 / 40%) 0 10px 15px -3px, rgb(0 0 0 / 25%) 0 4px 6px -2px;
   }
 
   #social .button-icon {
@@ -111,68 +112,6 @@ code {
   padding: 4px 8px;
 }
 
-/* Global app layout and components */
-
 * {
   box-sizing: border-box;
-}
-
-.title {
-  align-items: center;
-  display: flex;
-  justify-content: center;
-  margin: 2rem 0;
-}
-
-.title h1 {
-  color: #2c3e50;
-  font-size: 2.5rem;
-}
-
-.container {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  margin: 0 auto;
-  max-width: 1200px;
-  padding: 2rem;
-}
-
-nav {
-  display: flex;
-  justify-content: center;
-  margin: 1rem 0 2rem;
-  width: 100%;
-}
-
-.nav-button {
-  background-color: #4a90e2;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 0.75rem 1.5rem;
-  transition: background-color 0.3s;
-}
-
-.nav-button:hover {
-  background-color: #357abd;
-}
-
-.submit-button {
-  background-color: #27ae60;
-  border: none;
-  border-radius: 4px;
-  color: white;
-  cursor: pointer;
-  font-size: 1rem;
-  margin-top: 1.5rem;
-  padding: 0.75rem 2rem;
-  transition: background-color 0.3s;
-}
-
-.submit-button:hover {
-  background-color: #229954;
 }

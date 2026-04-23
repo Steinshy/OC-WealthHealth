@@ -62,7 +62,13 @@ export const states: State[] = [
   { name: 'Wyoming', abbreviation: 'WY' },
 ];
 
-export const departments = ['Sales', 'Marketing', 'Engineering', 'Human Resources', 'Legal'];
+export const departments = [
+  'Sales',
+  'Marketing',
+  'Engineering',
+  'Human Resources',
+  'Legal',
+];
 
 export const getEmployees = (): Employee[] => {
   const data = localStorage.getItem('employees');

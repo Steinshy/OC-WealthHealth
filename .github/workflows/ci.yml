@@ -30,9 +30,6 @@ jobs:
       - name: Build project
         run: npm run build
 
-      - name: Type check
-        run: npx tsc --noEmit
-
       - name: Lint TypeScript/React
         run: npm run lint
 

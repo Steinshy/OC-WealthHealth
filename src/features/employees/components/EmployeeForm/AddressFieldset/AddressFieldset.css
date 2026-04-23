@@ -1,0 +1,12 @@
+.address-fieldset {
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin: 2rem 0;
+  padding: 1.5rem;
+}
+
+.address-fieldset legend {
+  color: #333;
+  font-weight: 600;
+  padding: 0 0.5rem;
+}

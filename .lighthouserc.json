@@ -8,10 +8,7 @@
     "collect": {
       "startServerCommand": "npm run dev",
       "startServerReadyPattern": "Local:",
-      "url": [
-        "http://127.0.0.1:5173/",
-        "http://127.0.0.1:5173/employees"
-      ],
+      "url": ["http://127.0.0.1:5173/", "http://127.0.0.1:5173/employees"],
       "numberOfRuns": 3,
       "settings": {
         "chromeFlags": [

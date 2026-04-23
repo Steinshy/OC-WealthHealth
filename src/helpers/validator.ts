@@ -21,7 +21,9 @@ export const validateZipCode = (zipCode: string): ValidationError | null => {
 /**
  * Validates date of birth (must be in the past)
  */
-export const validateDateOfBirth = (dateOfBirth: string): ValidationError | null => {
+export const validateDateOfBirth = (
+  dateOfBirth: string,
+): ValidationError | null => {
   const dob = new Date(dateOfBirth);
   const now = new Date();
 
@@ -37,7 +39,10 @@ export const validateDateOfBirth = (dateOfBirth: string): ValidationError | null
 /**
  * Validates start date (must be after date of birth)
  */
-export const validateStartDate = (startDate: string, dateOfBirth: string): ValidationError | null => {
+export const validateStartDate = (
+  startDate: string,
+  dateOfBirth: string,
+): ValidationError | null => {
   const startDateObj = new Date(startDate);
   const dobObj = new Date(dateOfBirth);
 
@@ -67,7 +72,10 @@ export const validateEmployee = (employee: Employee): ValidationError[] => {
 
   // Validate start date (only if dob is valid)
   if (!dobError) {
-    const startDateError = validateStartDate(employee.startDate, employee.dateOfBirth);
+    const startDateError = validateStartDate(
+      employee.startDate,
+      employee.dateOfBirth,
+    );
     if (startDateError) errors.push(startDateError);
   }
 

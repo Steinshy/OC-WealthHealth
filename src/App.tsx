@@ -1,8 +1,8 @@
 import { BrowserRouter, Routes, Route } from 'react-router';
 
 import { Create, List } from '@/pages/employees';
-import { Layout } from '@/components/Layout';
-import { ToastProvider } from '@/contexts/ToastContext';
+import { Layout } from '@/components/shell';
+import { ToastProvider } from '@/components/Toast';
 
 import '@/index.css';
 

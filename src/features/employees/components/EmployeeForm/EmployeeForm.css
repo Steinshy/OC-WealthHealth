@@ -1,0 +1,18 @@
+#create-employee {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+#create-employee button {
+  align-self: center;
+  margin-top: 1rem;
+}
+
+@media (width <= 768px) {
+  #create-employee {
+    max-width: 100%;
+  }
+}

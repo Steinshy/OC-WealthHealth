@@ -9,24 +9,32 @@ import tseslint from 'typescript-eslint';
 export default [
   {
     ignores: [
-      'dist',
-      'node_modules',
-      'build',
-      '*.config.js',
-      '*.config.mjs',
+      'dist/**',
+      'node_modules/**',
+      'build/**',
+      'coverage/**',
+      'lighthouse-reports/**',
+      '.lighthouseci/**',
       '.lighthouserc.*',
       '.oc/**',
       'public/**',
+      '*.min.js',
     ],
   },
   js.configs.recommended,
   {
-    files: ['**/*.{js,ts,tsx}'],
+    files: ['eslint.config.js', 'stylelint.config.js', 'vite.config.ts'],
+    languageOptions: {
+      globals: { ...globals.node },
+    },
+  },
+  {
+    files: ['src/**/*.{js,ts,tsx}'],
     plugins: {
       import: importPlugin,
     },
     languageOptions: {
-      ecmaVersion: 2020,
+      ecmaVersion: 'latest',
       globals: { ...globals.browser },
       parserOptions: {
         ecmaVersion: 'latest',

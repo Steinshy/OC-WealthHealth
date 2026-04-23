@@ -1,0 +1,27 @@
+.text-input {
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  padding: 0.5rem;
+  transition: border-color 0.2s;
+  width: 100%;
+}
+
+.text-input:focus {
+  border-color: var(--primary-color, #007bff);
+  box-shadow: 0 0 0 3px rgb(0 123 255 / 25%);
+  outline: none;
+}
+
+.text-input:disabled {
+  background-color: #f5f5f5;
+  cursor: not-allowed;
+}
+
+.text-input.input-error {
+  border-color: #dc3545;
+}
+
+.text-input.input-error:focus {
+  box-shadow: 0 0 0 3px rgb(220 53 69 / 25%);
+}

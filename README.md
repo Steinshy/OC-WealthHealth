@@ -79,6 +79,7 @@ npm run preview
 ## Key Components
 
 ### CreateEmployee
+
 - Form with all required employee fields
 - Date inputs for birth date and start date
 - State dropdown with all US states
@@ -86,6 +87,7 @@ npm run preview
 - Success modal notification on submit
 
 ### EmployeeList
+
 - Displays all employees from localStorage
 - Real-time search functionality
 - Sortable columns (click header to sort)
@@ -93,6 +95,7 @@ npm run preview
 - Shows entry count
 
 ### SuccessModal
+
 - Auto-closing notification
 - Feedback for successful operations
 
@@ -117,6 +120,7 @@ interface Employee {
 ## Styling
 
 The application uses a clean, modern design with:
+
 - Consistent color scheme (blues, greens)
 - Responsive layout that works on mobile, tablet, and desktop
 - Focus states and hover effects for accessibility
@@ -127,3 +131,6 @@ The application uses a clean, modern design with:
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
+
+// use State
+// J quary => React explain
