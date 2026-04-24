@@ -60,7 +60,9 @@
   padding: 6px 16px;
   text-decoration: none;
   text-transform: uppercase;
-  transition: background 200ms, color 200ms;
+  transition:
+    background 200ms,
+    color 200ms;
   white-space: nowrap;
 }
 

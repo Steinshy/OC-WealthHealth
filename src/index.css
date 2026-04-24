@@ -14,12 +14,10 @@
   --mu-divider: rgb(0 0 0 / 12%);
   --mu-error: #d32f2f;
   --mu-shadow-1:
-    0px 2px 1px -1px rgb(0 0 0 / 20%),
-    0px 1px 1px 0px rgb(0 0 0 / 14%),
+    0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
     0px 1px 3px 0px rgb(0 0 0 / 12%);
   --mu-shadow-4:
-    0px 2px 4px -1px rgb(0 0 0 / 20%),
-    0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
     0px 1px 10px 0px rgb(0 0 0 / 12%);
 
   background: var(--mu-bg);
