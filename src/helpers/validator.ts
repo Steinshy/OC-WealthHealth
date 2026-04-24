@@ -5,9 +5,7 @@ export interface ValidationError {
   message: string;
 }
 
-/**
- * Validates zip code format (must be exactly 5 digits)
- */
+// Validates zip code format (must be exactly 5 digits)
 export const validateZipCode = (zipCode: string): ValidationError | null => {
   if (!/^\d{5}$/.test(zipCode)) {
     return {
@@ -18,9 +16,7 @@ export const validateZipCode = (zipCode: string): ValidationError | null => {
   return null;
 };
 
-/**
- * Validates date of birth (must be in the past)
- */
+// Validates date of birth (must be in the past)
 export const validateDateOfBirth = (
   dateOfBirth: string,
 ): ValidationError | null => {
@@ -36,9 +32,7 @@ export const validateDateOfBirth = (
   return null;
 };
 
-/**
- * Validates start date (must be after date of birth)
- */
+// Validates start date (must be after date of birth)
 export const validateStartDate = (
   startDate: string,
   dateOfBirth: string,
@@ -55,10 +49,7 @@ export const validateStartDate = (
   return null;
 };
 
-/**
- * Validates entire employee form
- * Returns an array of validation errors (empty if valid)
- */
+// Validates entire employee form and returns an array of validation errors (empty if valid)
 export const validateEmployee = (employee: Employee): ValidationError[] => {
   const errors: ValidationError[] = [];
 
