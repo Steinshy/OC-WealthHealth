@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router';
 
 import type { Employee } from '@/types';
 import { getEmployees } from '@/utils/states';
@@ -11,7 +10,6 @@ import { EmployeeListControls, EmployeeTable } from '@/features/employees';
 const ITEMS_PER_PAGE = 10;
 
 export const List = () => {
-  const navigate = useNavigate();
   const [employees] = useState<Employee[]>(() => getEmployees());
 
   // Compose hooks
@@ -27,11 +25,7 @@ export const List = () => {
   };
 
   return (
-    <PageTemplate
-      pageHeading="Employees"
-      navLabel="Create Employee"
-      onNavClick={() => navigate('/')}
-    >
+    <PageTemplate pageHeading="Employees">
       <EmployeeListControls
         onSearch={handleSearch}
         searchTerm={filter.term}

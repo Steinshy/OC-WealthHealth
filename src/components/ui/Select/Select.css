@@ -1,29 +1,42 @@
 .select {
-  background-color: white;
-  border: 1px solid #ccc;
+  appearance: none;
+  background: var(--mu-surface);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='rgba(0,0,0,0.54)'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  border: 1px solid rgb(0 0 0 / 23%);
   border-radius: 4px;
+  color: var(--mu-text-primary);
   cursor: pointer;
+  font-family: Roboto, sans-serif;
   font-size: 1rem;
-  padding: 0.5rem;
-  transition: border-color 0.2s;
+  outline: none;
+  padding: 10.5px 14px;
+  padding-right: 36px;
+  transition: border-color 200ms cubic-bezier(0, 0, 0.2, 1);
   width: 100%;
 }
 
+.select:hover {
+  border-color: var(--mu-text-primary);
+}
+
 .select:focus {
-  border-color: var(--primary-color, #007bff);
-  box-shadow: 0 0 0 3px rgb(0 123 255 / 25%);
-  outline: none;
+  border-color: var(--mu-primary);
+  border-width: 2px;
+  padding: 9.5px 13px;
+  padding-right: 35px;
 }
 
 .select:disabled {
-  background-color: #f5f5f5;
+  background-color: rgb(0 0 0 / 4%);
   cursor: not-allowed;
 }
 
 .select.input-error {
-  border-color: #dc3545;
+  border-color: var(--mu-error);
 }
 
 .select.input-error:focus {
-  box-shadow: 0 0 0 3px rgb(220 53 69 / 25%);
+  border-color: var(--mu-error);
 }

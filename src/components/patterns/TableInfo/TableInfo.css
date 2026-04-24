@@ -1,9 +1,6 @@
 .table-info {
-  color: #666;
-  font-size: 0.95rem;
-  margin-bottom: 1.5rem;
-}
-
-.table-info p {
-  margin: 0;
+  color: var(--mu-text-secondary);
+  font-family: Roboto, sans-serif;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
 }

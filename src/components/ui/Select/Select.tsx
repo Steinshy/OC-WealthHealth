@@ -1,3 +1,5 @@
+import './Select.css';
+
 interface SelectProps extends React.SelectHTMLAttributes<HTMLSelectElement> {
   children: React.ReactNode;
   hasError?: boolean;

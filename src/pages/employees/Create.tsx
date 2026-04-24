@@ -15,11 +15,7 @@ export const Create = () => {
   };
 
   return (
-    <PageTemplate
-      pageHeading="Create Employee"
-      navLabel="View Current Employees"
-      onNavClick={() => navigate('/employees')}
-    >
+    <PageTemplate pageHeading="Create a new employee">
       <EmployeeForm onSuccess={() => setShowModal(true)} />
       <Modal
         isOpen={showModal}

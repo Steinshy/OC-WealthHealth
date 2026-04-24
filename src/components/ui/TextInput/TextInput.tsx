@@ -1,3 +1,5 @@
+import './TextInput.css';
+
 interface TextInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   hasError?: boolean;
 }

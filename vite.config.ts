@@ -68,7 +68,7 @@ export default defineConfig(({ mode }) => {
       react(),
       mode === 'production' &&
         visualizer({
-          open: true,
+          open: false,
           gzipSize: true,
           brotliSize: true,
           filename: 'dist/stats.html',

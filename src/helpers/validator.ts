@@ -27,7 +27,7 @@ export const validateDateOfBirth = (
   const dob = new Date(dateOfBirth);
   const now = new Date();
 
-  if (dob >= now) {
+  if (Number.isNaN(dob.getTime()) || dob >= now) {
     return {
       field: 'dateOfBirth',
       message: 'Date of birth must be in the past',
@@ -46,7 +46,7 @@ export const validateStartDate = (
   const startDateObj = new Date(startDate);
   const dobObj = new Date(dateOfBirth);
 
-  if (startDateObj < dobObj) {
+  if (Number.isNaN(startDateObj.getTime()) || startDateObj < dobObj) {
     return {
       field: 'startDate',
       message: 'Start date must be after date of birth',

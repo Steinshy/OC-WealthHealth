@@ -1,26 +1,15 @@
-import { NavBar } from '../NavBar';
-import { PageTitle } from '../PageTitle';
 import { Heading } from '@/components/ui/Heading';
 import './PageTemplate.css';
 
 interface PageTemplateProps {
   pageHeading: string;
-  navLabel: string;
-  onNavClick: () => void;
   children: React.ReactNode;
 }
 
-export const PageTemplate = ({
-  pageHeading,
-  navLabel,
-  onNavClick,
-  children,
-}: PageTemplateProps) => {
+export const PageTemplate = ({ pageHeading, children }: PageTemplateProps) => {
   return (
-    <div className="container">
-      <PageTitle />
-      <NavBar label={navLabel} onClick={onNavClick} />
-      <Heading level={2}>{pageHeading}</Heading>
+    <div className="page-container">
+      <Heading level={1}>{pageHeading}</Heading>
       {children}
     </div>
   );

@@ -14,6 +14,10 @@ export const Pagination = ({
   onNext,
   onPrev,
 }: PaginationProps) => {
+  if (totalPages === 0) {
+    return null;
+  }
+
   return (
     <div className="pagination">
       <Button onClick={onPrev} disabled={page === 1}>
@@ -24,10 +28,7 @@ export const Pagination = ({
         Page {page} of {totalPages}
       </span>
 
-      <Button
-        onClick={onNext}
-        disabled={page === totalPages || totalPages === 0}
-      >
+      <Button onClick={onNext} disabled={page === totalPages}>
         Next
       </Button>
     </div>

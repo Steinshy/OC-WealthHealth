@@ -131,6 +131,3 @@ The application uses a clean, modern design with:
 - Chrome/Edge (latest)
 - Firefox (latest)
 - Safari (latest)
-
-// use State
-// J quary => React explain
