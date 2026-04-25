@@ -1,13 +1,18 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router';
 
-import { Modal } from '@steinshy/wealthhealth-modal';
+import { Modal, useTheme } from '@steinshy/wealthhealth-modal';
 import { PageTemplate } from '@/components/shell';
 import { EmployeeForm } from '@/features/employees';
 
 export const Create = () => {
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
+  const { setTheme } = useTheme();
+
+  useEffect(() => {
+    setTheme('light');
+  }, [setTheme]);
 
   const handleCloseModal = () => {
     setShowModal(false);
@@ -20,6 +25,7 @@ export const Create = () => {
       <Modal
         isOpen={showModal}
         onClose={handleCloseModal}
+        title="Success"
         status="success"
         autoCloseDuration={1500}
       >

@@ -26,7 +26,7 @@
   "dependencies": {
     "@fontsource/dm-serif-display": "^5.2.8",
     "@fontsource/roboto": "^5.2.10",
-    "@steinshy/wealthhealth-modal": "^0.1.1",
+    "@steinshy/wealthhealth-modal": "^0.2.2",
     "react": "^19.2.5",
     "react-dom": "^19.2.5",
     "react-router": "^7.14.1"
