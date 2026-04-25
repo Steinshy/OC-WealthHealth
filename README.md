@@ -222,5 +222,3 @@ Component-scoped rules use co-located `*.css` files (not CSS Modules). Override 
 | Edge    | Latest |
 
 ---
-
-**More docs:** [Architecture (English)](ARCHITECTURE.md) · [Architecture (Français)](ARCHITECTURE.fr.md)

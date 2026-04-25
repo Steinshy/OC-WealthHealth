@@ -223,5 +223,3 @@ Les règles par composant sont dans des fichiers `*.css` adjacents (pas de CSS M
 | Edge       | Dernière |
 
 ---
-
-Pour l’architecture détaillée du code, voir aussi [ARCHITECTURE.fr.md](ARCHITECTURE.fr.md) (ou [ARCHITECTURE.md](ARCHITECTURE.md) en anglais).
