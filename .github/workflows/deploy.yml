@@ -55,6 +55,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
+    outputs:
+      page_url: ${{ steps.deployment.outputs.page_url }}
 
     steps:
       - name: Deploy
@@ -84,8 +86,7 @@ jobs:
       - name: Run Lighthouse CI
         run: |
           npx lhci autorun \
-            --collect.url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/ \
-            --collect.url=https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/employees \
+            --collect.url=${{ needs.deploy.outputs.page_url }} \
             --collect.numberOfRuns=3 \
             --collect.settings.chromeFlags="--no-sandbox --disable-setuid-sandbox --disable-dev-shm-usage" \
             --assert.preset=lighthouse:recommended \
