@@ -1,15 +1,5 @@
 <h1 align="center">WealthHealth</h1>
 
-<p align="left"><a href="README.md">English</a></p>
-
-Migration **HRnet** OpenClassrooms : une SPA React + TypeScript pour créer et lister des employés, avec l’effectif tenu en **contexte React en mémoire** (un rechargement de page efface les données), validation des saisies, interface responsive et **Lighthouse CI** optionnel dans GitHub Actions.
-
-**GitHub :** https://github.com/Steinshy/OC-WealthHealth
-
-**Démo en ligne (GitHub Pages) :** https://steinshy.github.io/OC-WealthHealth/
-
-**Paquet modal utilisé dans l’app :** https://www.npmjs.com/package/@steinshy/wealthhealth-modal · https://github.com/Steinshy/OC-WealthHealth-modal
-
 [![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=react-router&logoColor=white)](https://reactrouter.com)
@@ -26,6 +16,20 @@ Migration **HRnet** OpenClassrooms : une SPA React + TypeScript pour créer et l
     alt="WealthHealth HR — maquette responsive (bureau, tablette, mobile)"
   />
 </p>
+
+Migration **HRnet** OpenClassrooms : une SPA React + TypeScript pour créer et lister des employés, avec l’effectif tenu en **contexte React en mémoire** (un rechargement de page efface les données), validation des saisies, interface responsive et **Lighthouse CI** optionnel dans GitHub Actions.
+
+## Démo en ligne et ressources
+
+| Ressource             | URL ou lien                                                                                |
+| --------------------- | ------------------------------------------------------------------------------------------ |
+| Langue                | Français · [English](./README.md)                                                          |
+| Architecture          | [ARCHITECTURE.md](./ARCHITECTURE.md)                                                       |
+| ArchitectureFr        | [ARCHITECTURE.fr.md](./ARCHITECTURE.fr.md)                                                 |
+| GitHub                | https://github.com/Steinshy/OC-WealthHealth                                                |
+| Démo en ligne         | https://steinshy.github.io/OC-WealthHealth/                                                |
+| Paquet modal (npm)    | [@steinshy/wealthhealth-modal](https://www.npmjs.com/package/@steinshy/wealthhealth-modal) |
+| Paquet modal (GitHub) | [OC-WealthHealth-modal](https://github.com/Steinshy/OC-WealthHealth-modal)                 |
 
 ## Fonctionnalités
 
