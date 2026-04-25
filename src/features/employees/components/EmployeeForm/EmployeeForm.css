@@ -1,0 +1,23 @@
+#create-employee {
+  background: var(--mu-surface);
+  border-radius: 4px;
+  box-shadow: var(--mu-shadow-1);
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin: 0 auto;
+  max-width: 640px;
+  padding: 32px;
+}
+
+#create-employee button[type='submit'] {
+  align-self: flex-end;
+  margin-top: 8px;
+}
+
+@media (width <= 768px) {
+  #create-employee {
+    max-width: 100%;
+    padding: 20px 16px;
+  }
+}

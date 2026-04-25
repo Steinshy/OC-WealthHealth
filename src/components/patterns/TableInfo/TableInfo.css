@@ -1,0 +1,6 @@
+.table-info {
+  color: var(--mu-text-secondary);
+  font-family: Roboto, sans-serif;
+  font-size: 0.875rem;
+  margin-bottom: 12px;
+}

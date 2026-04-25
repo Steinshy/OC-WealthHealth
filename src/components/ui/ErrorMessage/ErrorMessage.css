@@ -1,0 +1,8 @@
+.error-message {
+  color: var(--mu-error);
+  font-family: Roboto, sans-serif;
+  font-size: 0.75rem;
+  letter-spacing: 0.0333em;
+  line-height: 1.66;
+  margin-top: 3px;
+}

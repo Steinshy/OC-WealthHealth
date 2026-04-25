@@ -1,0 +1,27 @@
+.search-container {
+  margin-bottom: 16px;
+}
+
+.search-input {
+  background: var(--mu-surface);
+  border: 1px solid rgb(0 0 0 / 23%);
+  border-radius: 4px;
+  color: var(--mu-text-primary);
+  font-family: Roboto, sans-serif;
+  font-size: 0.875rem;
+  max-width: 300px;
+  outline: none;
+  padding: 8px 12px;
+  transition: border-color 200ms;
+  width: 100%;
+}
+
+.search-input:hover {
+  border-color: var(--mu-text-primary);
+}
+
+.search-input:focus {
+  border-color: var(--mu-primary);
+  border-width: 2px;
+  padding: 7px 11px;
+}

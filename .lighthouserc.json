@@ -1,0 +1,27 @@
+{
+  "ci": {
+    "upload": {
+      "target": "filesystem",
+      "outputDir": "./lighthouse-reports",
+      "reportFilenamePattern": "lighthouse-report-%%PATHNAME%%-%%TIMESTAMP%%"
+    },
+    "assert": {
+      "preset": "lighthouse:recommended",
+      "assertions": {
+        "color-contrast": ["warn", { "minScore": 0 }],
+        "csp-xss": ["warn", { "minScore": 0 }],
+        "installable-manifest": ["warn", { "minScore": 0 }],
+        "maskable-icon": ["warn", { "minScore": 0 }],
+        "service-worker": ["warn", { "minScore": 0 }],
+        "splash-screen": ["warn", { "minScore": 0 }],
+        "themed-omnibox": ["warn", { "minScore": 0 }],
+        "categories:performance": ["error", { "minScore": 0.8 }],
+        "categories:accessibility": ["error", { "minScore": 0.9 }],
+        "categories:best-practices": ["error", { "minScore": 0.9 }],
+        "categories:seo": ["error", { "minScore": 0.9 }],
+        "unused-javascript": ["warn", { "maxLength": 1 }],
+        "network-dependency-tree-insight": ["warn", { "minScore": 0 }]
+      }
+    }
+  }
+}

@@ -1,0 +1,17 @@
+node_modules
+dist
+build
+.cursor
+coverage
+.oc/**
+*.lock
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+.cache
+.DS_Store
+*.log
+.env
+.env.local
+.env.*.local
+*.local

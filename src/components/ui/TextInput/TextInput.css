@@ -1,0 +1,35 @@
+.text-input {
+  background: var(--mu-surface);
+  border: 1px solid rgb(0 0 0 / 23%);
+  border-radius: 4px;
+  color: var(--mu-text-primary);
+  font-family: Roboto, sans-serif;
+  font-size: 1rem;
+  outline: none;
+  padding: 10.5px 14px;
+  transition: border-color 200ms cubic-bezier(0, 0, 0.2, 1);
+  width: 100%;
+}
+
+.text-input:hover {
+  border-color: var(--mu-text-primary);
+}
+
+.text-input:focus {
+  border-color: var(--mu-primary);
+  border-width: 2px;
+  padding: 9.5px 13px;
+}
+
+.text-input:disabled {
+  background-color: rgb(0 0 0 / 4%);
+  cursor: not-allowed;
+}
+
+.text-input.input-error {
+  border-color: var(--mu-error);
+}
+
+.text-input.input-error:focus {
+  border-color: var(--mu-error);
+}

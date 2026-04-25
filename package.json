@@ -1,0 +1,62 @@
+{
+  "name": "wealthhealth",
+  "version": "1.0.0",
+  "description": "HRnet employee management system",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json && vite build",
+    "preview": "vite preview",
+    "type-check": "tsc --noEmit -p tsconfig.app.json && tsc --noEmit -p tsconfig.node.json",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \"knip.json\" \"README.md\" \"README.fr.md\" \"ARCHITECTURE.md\" \"ARCHITECTURE.fr.md\" \".github/**/*.yml\" \".lighthouserc.json\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \"knip.json\" \"README.md\" \"README.fr.md\" \"ARCHITECTURE.md\" \"ARCHITECTURE.fr.md\" \".github/**/*.yml\" \".lighthouserc.json\"",
+    "lighthouse": "LHCI_CONFIG_FILE=.lighthouserc.local.json lhci autorun",
+    "lighthouse:report": "node scripts/lighthouse-report.mjs",
+    "lighthouse:report:hrnet": "node scripts/lighthouse-report-hrnet.mjs",
+    "lighthouse:pdf": "node scripts/lighthouse-pdf.mjs",
+    "lighthouse:compare": "node scripts/lighthouse-compare.mjs",
+    "lighthouse:full": "npm run lighthouse:report && npm run lighthouse:report:hrnet && npm run lighthouse:pdf && npm run lighthouse:compare",
+    "knip": "knip"
+  },
+  "dependencies": {
+    "@fontsource/dm-serif-display": "^5.2.8",
+    "@fontsource/roboto": "^5.2.10",
+    "@steinshy/wealthhealth-modal": "^0.2.2",
+    "react": "^19.2.5",
+    "react-dom": "^19.2.5",
+    "react-router": "^7.14.1"
+  },
+  "devDependencies": {
+    "@eslint/js": "^10.0.1",
+    "@lhci/cli": "^0.15.1",
+    "chrome-launcher": "^1.2.1",
+    "@types/node": "^25.4.0",
+    "@types/react": "^19.2.14",
+    "@types/react-dom": "^19.2.3",
+    "@vitejs/plugin-react": "^6.0.1",
+    "eslint": "^10.2.1",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-react-hooks": "^7.1.1",
+    "eslint-plugin-react-refresh": "^0.5.2",
+    "globals": "^17.4.0",
+    "knip": "^6.7.0",
+    "lighthouse": "^13.1.0",
+    "prettier": "^3.8.3",
+    "puppeteer": "^24.42.0",
+    "rollup-plugin-visualizer": "^7.0.1",
+    "stylelint": "^17.9.0",
+    "stylelint-config-standard": "^40.0.0",
+    "stylelint-order": "^8.0.0",
+    "typescript": "^6.0.3",
+    "typescript-eslint": "^8.59.0",
+    "vite": "^8.0.10",
+    "vite-plugin-checker": "^0.13.0"
+  }
+}

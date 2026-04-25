@@ -1,0 +1,8 @@
+.heading {
+  color: var(--mu-text-primary);
+  font-family: 'DM Serif Display', serif;
+  font-size: 2rem;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  margin: 0 0 28px;
+}

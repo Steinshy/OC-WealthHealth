@@ -1,0 +1,16 @@
+.address-fieldset {
+  border: 1px solid var(--mu-divider);
+  border-radius: 4px;
+  margin: 8px 0 20px;
+  padding: 20px 20px 8px;
+}
+
+.address-fieldset legend {
+  color: var(--mu-text-secondary);
+  font-family: Roboto, sans-serif;
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  padding: 0 6px;
+  text-transform: uppercase;
+}

@@ -1,0 +1,54 @@
+@import url('@fontsource/roboto/latin-400.css');
+@import url('@fontsource/roboto/latin-500.css');
+@import url('@fontsource/roboto/latin-600.css');
+@import url('@fontsource/dm-serif-display/latin-400.css');
+
+/* Breakpoints: use these literals in @media (width <= …) across CSS files — tablet 768px, narrow phone 480px. */
+:root {
+  --mu-bp-mobile: 480px;
+  --mu-bp-tablet: 768px;
+  --mu-primary: #1976d2;
+  --mu-primary-dark: #1565c0;
+  --mu-bg: #f5f5f5;
+  --mu-surface: #fff;
+  --mu-text-primary: rgb(0 0 0 / 87%);
+  --mu-text-secondary: rgb(0 0 0 / 60%);
+  --mu-divider: rgb(0 0 0 / 12%);
+  --mu-error: #d32f2f;
+  --mu-shadow-1:
+    0px 2px 1px -1px rgb(0 0 0 / 20%), 0px 1px 1px 0px rgb(0 0 0 / 14%),
+    0px 1px 3px 0px rgb(0 0 0 / 12%);
+  --mu-shadow-4:
+    0px 2px 4px -1px rgb(0 0 0 / 20%), 0px 4px 5px 0px rgb(0 0 0 / 14%),
+    0px 1px 10px 0px rgb(0 0 0 / 12%);
+
+  background: var(--mu-bg);
+  color: var(--mu-text-primary);
+  font-family: Roboto, sans-serif;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.5;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--mu-bg);
+  margin: 0;
+}
+
+#root {
+  background: var(--mu-bg);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  min-height: 100svh;
+  width: 100%;
+}
+
+p {
+  margin: 0;
+}

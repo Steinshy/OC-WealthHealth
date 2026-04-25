@@ -1,0 +1,20 @@
+.pagination {
+  align-items: center;
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-top: 24px;
+}
+
+.pagination-info {
+  color: var(--mu-text-secondary);
+  font-family: Roboto, sans-serif;
+  font-size: 0.875rem;
+  padding: 0 8px;
+  white-space: nowrap;
+}
+
+.pagination .btn {
+  min-width: 48px;
+  padding: 6px 12px;
+}

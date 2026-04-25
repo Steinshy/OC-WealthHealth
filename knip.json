@@ -1,0 +1,6 @@
+{
+  "entry": ["scripts/**/*.mjs"],
+  "project": ["src/**/*.{ts,tsx}", "scripts/**/*.mjs"],
+  "ignore": ["src/types/env.d.ts"],
+  "ignoreDependencies": ["@fontsource/dm-serif-display", "@fontsource/roboto"]
+}
