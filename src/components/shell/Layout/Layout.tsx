@@ -25,6 +25,12 @@ export const Layout: React.FC<LayoutProps> = ({ children }) => {
             to="/"
             className={`appbar-link${location.pathname === '/' ? ' appbar-link--active' : ''}`}
           >
+            Home
+          </Link>
+          <Link
+            to="/create"
+            className={`appbar-link${location.pathname === '/create' ? ' appbar-link--active' : ''}`}
+          >
             Create
           </Link>
           <Link

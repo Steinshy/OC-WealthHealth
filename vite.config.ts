@@ -12,7 +12,7 @@ export default defineConfig(({ mode }) => {
     target: 'esnext',
     outDir: 'dist',
     assetsDir: 'assets',
-    sourcemap: mode === 'production' ? false : true,
+    sourcemap: mode !== 'production',
     cssCodeSplit: true,
     cssMinify: 'lightningcss' as const,
     assetsInlineLimit: 4096,
@@ -20,17 +20,12 @@ export default defineConfig(({ mode }) => {
     minify: 'oxc' as const,
     reportCompressedSize: true,
     modulePreload: {
-      polyfill: true,
+      polyfill: false,
     },
     rolldownOptions: {
       output: {
         codeSplitting: {
           groups: [
-            {
-              name: 'vendor-ui',
-              test: /node_modules[\\/]lucide-react[\\/]/,
-              priority: 4,
-            },
             {
               name: 'vendor-react',
               test: /node_modules[\\/](react|react-dom|react-router)[\\/]/,
@@ -43,10 +38,8 @@ export default defineConfig(({ mode }) => {
     },
   };
 
-  // Production Mode
   if (mode === 'production') {
     Object.assign(buildOptions, {
-      sourcemap: false,
       manifest: true,
     });
   }
@@ -56,9 +49,6 @@ export default defineConfig(({ mode }) => {
       port: 5173,
       strictPort: true,
       open: false,
-    },
-    define: {
-      __APP_PUBLIC_BASE_PATH__: JSON.stringify(appPublicBasePath),
     },
     oxc: {
       jsx: { runtime: 'automatic' },
@@ -83,7 +73,7 @@ export default defineConfig(({ mode }) => {
     publicDir: './public',
     build: buildOptions,
     optimizeDeps: {
-      include: ['lucide-react', 'react', 'react-dom', 'react-router'],
+      include: ['react', 'react-dom', 'react-router'],
     },
     preview: {
       host: 'localhost',

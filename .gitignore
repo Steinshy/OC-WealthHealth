@@ -39,7 +39,5 @@ Thumbs.db
 .claude
 CLAUDE.md
 memory
-lighthouse-reports
-.lighthouseci
+.chrome-tmp
 TODO.md
-src/utils/storage.ts

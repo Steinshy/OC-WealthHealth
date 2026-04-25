@@ -19,13 +19,22 @@ export default [
       '.oc/**',
       'public/**',
       '*.min.js',
+      'HRNet-original/**',
     ],
   },
   js.configs.recommended,
   {
-    files: ['eslint.config.js', 'stylelint.config.js', 'vite.config.ts'],
+    files: [
+      'eslint.config.js',
+      'stylelint.config.js',
+      'vite.config.ts',
+      'scripts/**/*.mjs',
+    ],
     languageOptions: {
       globals: { ...globals.node },
+    },
+    rules: {
+      'no-control-regex': 'off',
     },
   },
   {
@@ -91,6 +100,12 @@ export default [
     },
     settings: {
       react: { version: 'detect' },
+    },
+  },
+  {
+    files: ['src/context/**/*.tsx'],
+    rules: {
+      'react-refresh/only-export-components': 'off',
     },
   },
   prettier,

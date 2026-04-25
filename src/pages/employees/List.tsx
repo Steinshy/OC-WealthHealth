@@ -1,8 +1,5 @@
-import { useState } from 'react';
-
-import type { Employee } from '@/types';
-import { getEmployees } from '@/utils/states';
 import { useFilter, useSortableData, usePagination } from '@/hooks';
+import { useEmployees } from '@/context/EmployeeContext';
 import { PageTemplate } from '@/components/shell';
 import { Pagination } from '@/components/patterns';
 import { EmployeeListControls, EmployeeTable } from '@/features/employees';
@@ -10,7 +7,7 @@ import { EmployeeListControls, EmployeeTable } from '@/features/employees';
 const ITEMS_PER_PAGE = 10;
 
 export const List = () => {
-  const [employees] = useState<Employee[]>(() => getEmployees());
+  const { employees } = useEmployees();
 
   // Compose hooks
   const filter = useFilter(employees);

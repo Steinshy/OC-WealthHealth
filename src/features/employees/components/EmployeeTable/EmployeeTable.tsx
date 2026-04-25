@@ -57,8 +57,8 @@ export const EmployeeTable = ({
         </thead>
         <tbody>
           {employees.length > 0 ? (
-            employees.map((employee, index) => (
-              <tr key={employee.id ?? `row-${index}`}>
+            employees.map((employee) => (
+              <tr key={employee.id}>
                 <td>{employee.firstName}</td>
                 <td>{employee.lastName}</td>
                 <td>{employee.startDate}</td>

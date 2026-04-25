@@ -16,7 +16,12 @@
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
     "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
-    "lighthouse": "lhci autorun"
+    "lighthouse": "lhci autorun",
+    "lighthouse:report": "node scripts/lighthouse-report.mjs",
+    "lighthouse:report:hrnet": "node scripts/lighthouse-report-hrnet.mjs",
+    "lighthouse:pdf": "node scripts/lighthouse-pdf.mjs",
+    "lighthouse:compare": "node scripts/lighthouse-compare.mjs",
+    "lighthouse:full": "npm run lighthouse:report && npm run lighthouse:report:hrnet && npm run lighthouse:pdf && npm run lighthouse:compare"
   },
   "dependencies": {
     "@fontsource/dm-serif-display": "^5.2.8",
@@ -41,6 +46,7 @@
     "globals": "^17.4.0",
     "lighthouse": "^13.1.0",
     "prettier": "^3.8.3",
+    "puppeteer": "^24.42.0",
     "rollup-plugin-visualizer": "^7.0.1",
     "stylelint": "^17.9.0",
     "stylelint-config-standard": "^40.0.0",

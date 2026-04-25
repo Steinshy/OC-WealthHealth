@@ -14,7 +14,9 @@ export const TableInfo = ({
   return (
     <div className="table-info">
       <p>
-        Showing {startIndex + 1} to {endIndex} of {totalCount} entries
+        {totalCount === 0
+          ? 'No entries'
+          : `Showing ${startIndex + 1} to ${endIndex} of ${totalCount} entries`}
       </p>
     </div>
   );

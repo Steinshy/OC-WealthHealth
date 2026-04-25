@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { validateEmployee } from '@/helpers/validator';
 import type { Employee } from '@/types';
-import { saveEmployee } from '@/utils/states';
+import { useEmployees } from '@/context/EmployeeContext';
 
 export const useEmployeeForm = (onSuccessCallback?: () => void) => {
-  const [showSuccess, setShowSuccess] = useState(false);
+  const { addEmployee } = useEmployees();
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [formData, setFormData] = useState<Employee>({
     firstName: '',
@@ -62,8 +62,7 @@ export const useEmployeeForm = (onSuccessCallback?: () => void) => {
       return;
     }
 
-    saveEmployee(formData);
-    setShowSuccess(true);
+    addEmployee(formData);
     resetForm();
 
     if (onSuccessCallback) {
@@ -71,17 +70,11 @@ export const useEmployeeForm = (onSuccessCallback?: () => void) => {
     }
   };
 
-  const closeSuccess = () => {
-    setShowSuccess(false);
-  };
-
   return {
     formData,
     errors,
-    showSuccess,
     handleChange,
     handleSubmit,
-    closeSuccess,
     resetForm,
   };
 };

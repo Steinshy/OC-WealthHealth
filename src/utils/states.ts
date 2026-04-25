@@ -1,4 +1,4 @@
-import type { Employee, State } from '../types';
+import type { State } from '../types';
 
 export const states: State[] = [
   { name: 'Alabama', abbreviation: 'AL' },
@@ -69,30 +69,3 @@ export const departments = [
   'Human Resources',
   'Legal',
 ];
-
-export const getEmployees = (): Employee[] => {
-  const data = localStorage.getItem('employees');
-  if (!data) return [];
-  try {
-    const parsed: unknown = JSON.parse(data);
-    return Array.isArray(parsed) ? (parsed as Employee[]) : [];
-  } catch {
-    console.error('Failed to parse employees from localStorage');
-    return [];
-  }
-};
-
-export const saveEmployee = (employee: Employee): void => {
-  const employees = getEmployees();
-  const newEmployee = {
-    ...employee,
-    id: crypto.randomUUID(),
-  };
-  employees.push(newEmployee);
-  try {
-    localStorage.setItem('employees', JSON.stringify(employees));
-  } catch (err) {
-    console.error('Failed to save employee to localStorage', err);
-    throw err;
-  }
-};

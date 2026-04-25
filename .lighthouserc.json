@@ -3,18 +3,19 @@
     "upload": {
       "target": "filesystem",
       "outputDir": "./lighthouse-reports",
-      "reportFilenamePattern": "lighthouse-report-%%TIMESTAMP%%.json"
+      "reportFilenamePattern": "lighthouse-report-%%PATHNAME%%-%%TIMESTAMP%%"
     },
     "collect": {
-      "startServerCommand": "npm run preview",
+      "startServerCommand": "npm run preview -- --port 4173",
       "startServerReadyPattern": "Local:",
-      "url": ["http://localhost:3000/", "http://localhost:3000/employees"],
+      "url": ["http://localhost:4173/", "http://localhost:4173/employees"],
       "numberOfRuns": 3,
       "settings": {
         "chromeFlags": [
           "--no-sandbox",
           "--disable-setuid-sandbox",
-          "--disable-dev-shm-usage"
+          "--disable-dev-shm-usage",
+          "--user-data-dir=./.chrome-tmp"
         ]
       }
     },
