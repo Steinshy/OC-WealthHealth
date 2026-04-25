@@ -9,10 +9,11 @@
   background: var(--mu-primary);
   box-shadow: var(--mu-shadow-4);
   display: flex;
-  height: 64px;
   justify-content: space-between;
   left: 0;
-  padding: 0 24px;
+  min-height: calc(64px + env(safe-area-inset-top, 0));
+  padding: env(safe-area-inset-top, 0) max(24px, env(safe-area-inset-right, 0))
+    0 max(24px, env(safe-area-inset-left, 0));
   position: fixed;
   right: 0;
   top: 0;
@@ -78,5 +79,47 @@
 
 .layout-main {
   flex: 1;
-  padding-top: 64px;
+  padding-top: calc(64px + env(safe-area-inset-top, 0));
+}
+
+@media (width <= 768px) {
+  .appbar {
+    padding: env(safe-area-inset-top, 0)
+      max(12px, env(safe-area-inset-right, 0)) 0
+      max(12px, env(safe-area-inset-left, 0));
+  }
+
+  .appbar-brand {
+    gap: 8px;
+  }
+
+  .appbar-logo {
+    height: 32px;
+    width: 32px;
+  }
+
+  .appbar-name {
+    font-size: 18px;
+  }
+
+  .appbar-nav {
+    gap: 0;
+  }
+
+  .appbar-link {
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    min-height: 44px;
+    padding: 8px 10px;
+  }
+}
+
+@media (width <= 480px) {
+  .appbar-name {
+    font-size: 16px;
+  }
+
+  .appbar-link {
+    padding: 8px;
+  }
 }

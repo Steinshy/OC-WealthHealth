@@ -9,7 +9,7 @@ interface PageTemplateProps {
 export const PageTemplate = ({ pageHeading, children }: PageTemplateProps) => {
   return (
     <div className="page-container">
-      <Heading level={1}>{pageHeading}</Heading>
+      <Heading>{pageHeading}</Heading>
       {children}
     </div>
   );

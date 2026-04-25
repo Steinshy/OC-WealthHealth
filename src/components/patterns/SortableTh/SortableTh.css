@@ -28,3 +28,16 @@
   font-size: 0.75em;
   margin-left: 6px;
 }
+
+@media (width <= 480px) {
+  .sortable {
+    white-space: normal;
+  }
+
+  .sortable button {
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 4px;
+    min-height: 44px;
+  }
+}

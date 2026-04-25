@@ -3,10 +3,12 @@
 @import url('@fontsource/roboto/latin-600.css');
 @import url('@fontsource/dm-serif-display/latin-400.css');
 
+/* Breakpoints: use these literals in @media (width <= …) across CSS files — tablet 768px, narrow phone 480px. */
 :root {
+  --mu-bp-mobile: 480px;
+  --mu-bp-tablet: 768px;
   --mu-primary: #1976d2;
   --mu-primary-dark: #1565c0;
-  --mu-primary-light: #42a5f5;
   --mu-bg: #f5f5f5;
   --mu-surface: #fff;
   --mu-text-primary: rgb(0 0 0 / 87%);

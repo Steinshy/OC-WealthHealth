@@ -1,12 +1,12 @@
 import type { Employee } from '../types';
 
-export interface ValidationError {
+interface ValidationError {
   field: string;
   message: string;
 }
 
 // Validates zip code format (must be exactly 5 digits)
-export const validateZipCode = (zipCode: string): ValidationError | null => {
+const validateZipCode = (zipCode: string): ValidationError | null => {
   if (!/^\d{5}$/.test(zipCode)) {
     return {
       field: 'zipCode',
@@ -17,9 +17,7 @@ export const validateZipCode = (zipCode: string): ValidationError | null => {
 };
 
 // Validates date of birth (must be in the past)
-export const validateDateOfBirth = (
-  dateOfBirth: string,
-): ValidationError | null => {
+const validateDateOfBirth = (dateOfBirth: string): ValidationError | null => {
   const dob = new Date(dateOfBirth);
   const now = new Date();
 
@@ -33,7 +31,7 @@ export const validateDateOfBirth = (
 };
 
 // Validates start date (must be after date of birth)
-export const validateStartDate = (
+const validateStartDate = (
   startDate: string,
   dateOfBirth: string,
 ): ValidationError | null => {

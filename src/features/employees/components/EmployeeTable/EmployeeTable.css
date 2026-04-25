@@ -6,9 +6,16 @@
   width: 100%;
 }
 
+.employee-table-scroll {
+  -webkit-overflow-scrolling: touch;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+}
+
 .employee-table {
   border-collapse: collapse;
   font-size: 0.875rem;
+  min-width: max-content;
   width: 100%;
 }
 

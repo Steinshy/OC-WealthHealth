@@ -1,5 +1,7 @@
 # Architecture — WealthHealth (HRNet)
 
+[Français](ARCHITECTURE.fr.md)
+
 ## Overview
 
 WealthHealth is a React 19 + TypeScript single-page application built with Vite. It replaces the original jQuery HRNet project, allowing HR staff to create employee records and browse the employee list. There are no server-side dependencies — all state is held in memory for the session.
@@ -29,8 +31,9 @@ src/
 ├── features/
 │   └── employees/
 │       └── components/
-│           ├── EmployeeForm/   # Form + fieldsets for creating an employee
-│           └── EmployeeListControls/  # Search + pagination info bar
+│           ├── EmployeeForm/          # Form + fieldsets for creating an employee
+│           ├── EmployeeTable/         # Sortable table + horizontal scroll on small screens
+│           └── EmployeeListControls/  # Search + table info (counts)
 │
 ├── components/
 │   ├── shell/                  # Layout wrappers (Layout, PageTemplate)
@@ -155,21 +158,21 @@ Components are split into three layers:
 | --------- | -------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | Atoms     | `components/ui/`                 | Single-purpose elements: Button, TextInput, Select, Label, Heading, ErrorMessage, SortIndicator        |
 | Molecules | `components/patterns/`           | Composed from atoms: FormField (label + input + error), SortableTh, Pagination, SearchInput, TableInfo |
-| Organisms | `features/employees/components/` | Feature-specific blocks: EmployeeForm, AddressFieldset, EmployeeTable, EmployeeListControls            |
+| Organisms | `features/employees/components/` | Feature-specific blocks: EmployeeForm (includes AddressFieldset), EmployeeTable, EmployeeListControls  |
 | Templates | `components/shell/`              | Layout wrappers: Layout (nav + main), PageTemplate (heading + slot)                                    |
 
 ---
 
 ## Validation
 
-`src/helpers/validator.ts` contains pure functions with no side effects:
+`src/helpers/validator.ts` is pure logic with no side effects. **`validateEmployee`** is the only public export; it runs zip, date-of-birth, and start-date checks internally and returns a `ValidationError[]` (the helper functions and `ValidationError` type stay module-private).
 
-| Function              | Rule                                        |
-| --------------------- | ------------------------------------------- |
-| `validateZipCode`     | Must be exactly 5 digits                    |
-| `validateDateOfBirth` | Must be in the past                         |
-| `validateStartDate`   | Must be after date of birth                 |
-| `validateEmployee`    | Runs all three, returns `ValidationError[]` |
+| Concern            | Rule                                                       |
+| ------------------ | ---------------------------------------------------------- |
+| Zip                | Exactly 5 digits                                           |
+| Date of birth      | Must parse as a real date and be strictly before “now”     |
+| Start date         | Must be on or after date of birth (only checked if DOB OK) |
+| `validateEmployee` | Runs the above and aggregates any failures                 |
 
 `useEmployeeForm` calls `validateEmployee` on submit and maps the result into an error object keyed by field name, which `FormField` reads via its `error` prop.
 
@@ -180,12 +183,13 @@ Components are split into three layers:
 The jQuery modal plugin was replaced by `@steinshy/wealthhealth-modal` — a standalone npm package built in a separate repository. It is consumed in `<Create>` to show a success confirmation after an employee is saved.
 
 ```tsx
-// src/pages/employees/Create.tsx
-import { Modal } from '@steinshy/wealthhealth-modal';
+// src/pages/employees/Create.tsx (excerpt)
+import { Modal, useTheme } from '@steinshy/wealthhealth-modal';
 
 <Modal
   isOpen={showModal}
   onClose={handleCloseModal}
+  title="Success"
   status="success"
   autoCloseDuration={1500}
 >
@@ -193,7 +197,7 @@ import { Modal } from '@steinshy/wealthhealth-modal';
 </Modal>;
 ```
 
-See [`ARCHITECTURE.md` in the modal repo](../WealthHealth-modal/ARCHITECTURE.md) for its internal design.
+See the modal package repo for its own architecture and API docs.
 
 ---
 
@@ -202,6 +206,7 @@ See [`ARCHITECTURE.md` in the modal repo](../WealthHealth-modal/ARCHITECTURE.md)
 | Tool          | Config                | Purpose                                     |
 | ------------- | --------------------- | ------------------------------------------- |
 | Lighthouse CI | `.lighthouserc.json`  | Perf ≥0.80, A11y ≥0.90, BP ≥0.90, SEO ≥0.90 |
+| Knip          | `knip.json`           | Unused files, exports, dependency drift     |
 | ESLint        | `eslint.config.js`    | React Hooks rules, import order             |
 | Stylelint     | `stylelint.config.js` | CSS property order                          |
 | Prettier      | `.prettierrc.json`    | Consistent formatting                       |
@@ -210,3 +215,7 @@ See [`ARCHITECTURE.md` in the modal repo](../WealthHealth-modal/ARCHITECTURE.md)
 **Lighthouse scores (React app):** Performance 0.82 · Accessibility 1.0 · Best Practices 1.0 · SEO 1.0
 
 Reports: `lighthouse-reports/`
+
+---
+
+**Docs:** [README (English)](README.md) · [README (Français)](README.fr.md) · [Architecture (Français)](ARCHITECTURE.fr.md)

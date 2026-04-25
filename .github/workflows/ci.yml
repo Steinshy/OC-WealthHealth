@@ -30,6 +30,9 @@ jobs:
       - name: Build project
         run: npm run build
 
+      - name: Knip (unused exports, files, deps)
+        run: npm run knip
+
       - name: Lint TypeScript/React
         run: npm run lint
 

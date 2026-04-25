@@ -14,14 +14,15 @@
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
-    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
-    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
+    "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \"knip.json\" \"README.md\" \"README.fr.md\" \"ARCHITECTURE.md\" \"ARCHITECTURE.fr.md\" \".github/**/*.yml\" \".lighthouserc.json\"",
+    "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \"knip.json\" \"README.md\" \"README.fr.md\" \"ARCHITECTURE.md\" \"ARCHITECTURE.fr.md\" \".github/**/*.yml\" \".lighthouserc.json\"",
     "lighthouse": "LHCI_CONFIG_FILE=.lighthouserc.local.json lhci autorun",
     "lighthouse:report": "node scripts/lighthouse-report.mjs",
     "lighthouse:report:hrnet": "node scripts/lighthouse-report-hrnet.mjs",
     "lighthouse:pdf": "node scripts/lighthouse-pdf.mjs",
     "lighthouse:compare": "node scripts/lighthouse-compare.mjs",
-    "lighthouse:full": "npm run lighthouse:report && npm run lighthouse:report:hrnet && npm run lighthouse:pdf && npm run lighthouse:compare"
+    "lighthouse:full": "npm run lighthouse:report && npm run lighthouse:report:hrnet && npm run lighthouse:pdf && npm run lighthouse:compare",
+    "knip": "knip"
   },
   "dependencies": {
     "@fontsource/dm-serif-display": "^5.2.8",
@@ -34,6 +35,7 @@
   "devDependencies": {
     "@eslint/js": "^10.0.1",
     "@lhci/cli": "^0.15.1",
+    "chrome-launcher": "^1.2.1",
     "@types/node": "^25.4.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
@@ -44,6 +46,7 @@
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
+    "knip": "^6.7.0",
     "lighthouse": "^13.1.0",
     "prettier": "^3.8.3",
     "puppeteer": "^24.42.0",

@@ -1,23 +1,8 @@
 .heading {
   color: var(--mu-text-primary);
   font-family: 'DM Serif Display', serif;
-  font-weight: 400;
-  margin: 0 0 24px;
-}
-
-.heading-1 {
   font-size: 2rem;
+  font-weight: 400;
   letter-spacing: -0.01em;
-  margin-bottom: 28px;
-}
-
-.heading-2 {
-  font-size: 1.5rem;
-  letter-spacing: 0;
-}
-
-.heading-3 {
-  font-family: Roboto, sans-serif;
-  font-size: 1.25rem;
-  font-weight: 600;
+  margin: 0 0 28px;
 }

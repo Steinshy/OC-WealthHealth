@@ -1,110 +1,171 @@
-# WealthHealth Frontend - React Application
+<h1 align="center">WealthHealth</h1>
 
-A modern React + TypeScript application for the HRnet employee management system.
+<p align="left"><a href="README.fr.md">Français</a></p>
 
-## Project Structure
+OpenClassrooms **HRnet** migration: a React + TypeScript SPA to create and list employees, keep the roster in **in-memory React context** (refresh clears it), validate inputs, and ship a responsive layout with optional **Lighthouse CI** in GitHub Actions.
 
-```
-src/
-├── components/           # Reusable UI components
-│   └── SuccessModal.tsx # Success notification modal
-├── pages/               # Page components
-│   ├── CreateEmployee.tsx    # Employee creation form
-│   └── EmployeeList.tsx      # Employee list with search/sort
-├── styles/              # CSS styling
-│   ├── form.css        # Form styling
-│   ├── table.css       # Table styling
-│   └── modal.css       # Modal styling
-├── types/               # TypeScript type definitions
-│   └── index.ts        # Employee and State types
-├── utils/               # Utility functions
-│   └── states.ts       # State data, departments, and helpers
-├── App.tsx              # Main app with routing
-├── main.tsx             # React entry point
-└── App.css              # Global styles
-```
+**GitHub:** https://github.com/Steinshy/OC-WealthHealth
+
+**Live demo (GitHub Pages):** https://steinshy.github.io/OC-WealthHealth/
+
+**Modal package used in-app:** https://www.npmjs.com/package/@steinshy/wealthhealth-modal · https://github.com/Steinshy/OC-WealthHealth-modal
+
+[![TypeScript](https://img.shields.io/badge/TypeScript-6-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=black)](https://react.dev)
+[![React Router](https://img.shields.io/badge/React_Router-7-CA4245?logo=react-router&logoColor=white)](https://reactrouter.com)
+[![Node.js](https://img.shields.io/badge/node-%3E%3D22-339933?logo=node.js&logoColor=white)](https://nodejs.org)
+[![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite)](https://vitejs.dev)
+[![ESLint](https://img.shields.io/badge/ESLint-10-4B32C3?logo=eslint)](https://eslint.org)
+[![Prettier](https://img.shields.io/badge/Prettier-3-F7B93E?logo=prettier&logoColor=000)](https://prettier.io)
+[![Stylelint](https://img.shields.io/badge/Stylelint-17-000?logo=stylelint)](https://stylelint.io)
+[![Lighthouse CI](https://img.shields.io/badge/Lighthouse_CI-configured-F44B21?logo=lighthouse)](https://github.com/GoogleChrome/lighthouse-ci)
+
+<p align="center">
+  <img
+    src="public/Mockup/mockup.png"
+    alt="WealthHealth HR — responsive mockup (desktop, tablet, mobile)"
+  />
+</p>
 
 ## Features
 
-- ✅ Employee creation form with validation
-- ✅ Real-time search across employee data
-- ✅ Sortable employee table (click column headers)
-- ✅ Responsive design for mobile and desktop
-- ✅ LocalStorage persistence
-- ✅ Success notifications
-- ✅ TypeScript for type safety
-- ✅ React Router for navigation
+- **Employee CRUD-style flows** — Create form with US states, departments, dates, and address block; list with search, sort, and pagination
+- **Client-side state** — Employees live in `EmployeeContext` (`useReducer`); no `localStorage` or API persistence in this repo
+- **TypeScript-first** — Strict typing for domain models and hooks
+- **React Router 7** — `BrowserRouter` with `basename` from `import.meta.env.BASE_URL` for GitHub Pages
+- **Component layout** — Shell (`Layout`, `PageTemplate`), feature modules under `features/employees`, shared UI and patterns
+- **Responsive UI** — Breakpoints at 768px / 480px, horizontal scroll for the wide employee table on small screens, safe-area aware app bar
+- **Quality tooling** — ESLint 10, Stylelint 17, Prettier 3, Knip, TypeScript checks in build and optional Vite checker in dev
 
-## Getting Started
+## Prerequisites
 
-### Prerequisites
+- **Node.js** >= 22 (see `engines` in `package.json`)
+- **npm** 9+ recommended
 
-- Node.js 18+
-- npm 9+
-
-### Installation
+## Install
 
 ```bash
+git clone https://github.com/Steinshy/OC-WealthHealth.git
+cd OC-WealthHealth
 npm install
 ```
 
-### Development
+## Quick Start
+
+### Development server
 
 ```bash
 npm run dev
 ```
 
-The application will be available at `http://localhost:5173`
+The app is served at **http://localhost:5173** (see `vite.config.ts`).
 
-### Build for Production
+### Production build and preview
 
 ```bash
 npm run build
-```
-
-### Preview Production Build
-
-```bash
 npm run preview
 ```
 
-## Technologies
+Preview defaults to **http://localhost:3000**.
 
-- **React 18** - UI framework
-- **TypeScript** - Type safety
-- **React Router v6** - Client-side routing
-- **Vite** - Build tool
-- **CSS3** - Styling with responsive design
+### Success modal after creating an employee
 
-## Key Components
+`Create.tsx` wraps the form in `PageTemplate`, uses `Modal` from `@steinshy/wealthhealth-modal`, and calls `setTheme('light')` so the modal matches the app shell:
 
-### CreateEmployee
+```tsx
+import { Modal, useTheme } from '@steinshy/wealthhealth-modal';
+import { PageTemplate } from '@/components/shell';
+import { EmployeeForm } from '@/features/employees';
+import { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router';
 
-- Form with all required employee fields
-- Date inputs for birth date and start date
-- State dropdown with all US states
-- Department selection
-- Success modal notification on submit
+export const Create = () => {
+  const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
+  const { setTheme } = useTheme();
 
-### EmployeeList
+  useEffect(() => {
+    setTheme('light');
+  }, [setTheme]);
 
-- Displays all employees from localStorage
-- Real-time search functionality
-- Sortable columns (click header to sort)
-- Responsive table layout
-- Shows entry count
+  const handleCloseModal = () => {
+    setShowModal(false);
+    navigate('/employees');
+  };
 
-### SuccessModal
+  return (
+    <PageTemplate pageHeading="Create a new employee">
+      <EmployeeForm onSuccess={() => setShowModal(true)} />
+      <Modal
+        isOpen={showModal}
+        onClose={handleCloseModal}
+        title="Success"
+        status="success"
+        autoCloseDuration={1500}
+      >
+        <p>Employee Created!</p>
+      </Modal>
+    </PageTemplate>
+  );
+};
+```
 
-- Auto-closing notification
-- Feedback for successful operations
+## Routes
 
-## Data Management
+| Path         | Description                                     |
+| ------------ | ----------------------------------------------- |
+| `/`          | Home — entry hero and navigation to create/list |
+| `/create`    | Create employee form + success modal            |
+| `/employees` | Searchable, sortable, paginated employee table  |
 
-Employee data is stored in browser's localStorage under the key `employees`. Each employee object contains:
+## Project structure
+
+```
+src/
+├── App.tsx                 # Routes + EmployeeProvider + BrowserRouter
+├── main.tsx
+├── index.css               # Global tokens, fonts, reset
+├── context/
+│   └── EmployeeContext.tsx # In-memory employee list (useReducer)
+├── features/employees/     # Form, table, list controls
+├── components/
+│   ├── shell/              # Layout, PageTemplate
+│   ├── patterns/         # SearchInput, Pagination, SortableTh, …
+│   └── ui/                # Button, TextInput, Select, …
+├── pages/
+│   ├── Home/
+│   └── employees/         # Create, List
+├── hooks/                  # useFilter, useSortableData, usePagination, …
+├── helpers/
+│   └── validator.ts       # Form validation rules
+├── types/
+│   └── index.ts           # Employee, State
+└── utils/
+    └── states.ts          # US states list and departments
+```
+
+## npm scripts
+
+| Script                            | Description                                     |
+| --------------------------------- | ----------------------------------------------- |
+| `npm run dev`                     | Vite dev server (port 5173)                     |
+| `npm run build`                   | Typecheck + production bundle to `dist/`        |
+| `npm run preview`                 | Serve `dist/` (port 3000)                       |
+| `npm run type-check`              | `tsc --noEmit` only                             |
+| `npm run lint`                    | ESLint                                          |
+| `npm run lint:styles`             | Stylelint                                       |
+| `npm run format` / `format:check` | Prettier                                        |
+| `npm run knip`                    | Unused files, exports, and dependency check     |
+| `npm run lighthouse`              | Lighthouse CI (uses `.lighthouserc.local.json`) |
+
+## Data model
+
+While the session lasts, employees are held in context. Each new record gets an `id` from `crypto.randomUUID()` when it is added.
 
 ```typescript
-interface Employee {
+export interface Employee {
+  id?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -119,15 +180,44 @@ interface Employee {
 
 ## Styling
 
-The application uses a clean, modern design with:
+Global **Material-inspired** tokens live on `:root` in `src/index.css`. Breakpoint tokens (`--mu-bp-mobile`, `--mu-bp-tablet`) document the literals used in `@media` queries across component CSS.
 
-- Consistent color scheme (blues, greens)
-- Responsive layout that works on mobile, tablet, and desktop
-- Focus states and hover effects for accessibility
-- Smooth transitions and animations
+```css
+:root {
+  --mu-bp-mobile: 480px;
+  --mu-bp-tablet: 768px;
+  --mu-primary: #1976d2;
+  --mu-primary-dark: #1565c0;
+  --mu-bg: #f5f5f5;
+  --mu-surface: #fff;
+  --mu-text-primary: rgb(0 0 0 / 87%);
+  --mu-text-secondary: rgb(0 0 0 / 60%);
+  --mu-divider: rgb(0 0 0 / 12%);
+  --mu-error: #d32f2f;
+  --mu-shadow-1: /* elevation */;
+  --mu-shadow-4: /* app bar shadow */;
+}
+```
 
-## Browser Support
+Component-scoped rules use co-located `*.css` files (not CSS Modules). Override by editing those files or extending rules in `index.css`.
 
-- Chrome/Edge (latest)
-- Firefox (latest)
-- Safari (latest)
+## Accessibility
+
+- Semantic HTML for forms, tables, and navigation
+- Labels tied to inputs via shared `Label` / `FormField` patterns
+- Sortable column headers implemented as accessible buttons (`SortableTh`)
+- Visible focus styles on interactive controls (respect browser defaults where not overridden)
+- Minimum tap targets improved on small viewports for the app bar, table header actions, and primary buttons
+
+## Browser support
+
+| Browser | Notes  |
+| ------- | ------ |
+| Chrome  | Latest |
+| Firefox | Latest |
+| Safari  | Latest |
+| Edge    | Latest |
+
+---
+
+**More docs:** [Architecture (English)](ARCHITECTURE.md) · [Architecture (Français)](ARCHITECTURE.fr.md)
