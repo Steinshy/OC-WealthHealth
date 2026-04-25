@@ -16,7 +16,7 @@
     "lint:styles": "stylelint \"src/**/*.{css,scss}\"",
     "format": "prettier --write \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
     "format:check": "prettier --check \"src/**/*.{js,ts,tsx,css,scss}\" \"eslint.config.js\" \"stylelint.config.js\" \"vite.config.ts\" \"tsconfig.json\" \"tsconfig.app.json\" \"tsconfig.node.json\" \"package.json\" \".github/**/*.yml\" \".lighthouserc.json\"",
-    "lighthouse": "lhci autorun",
+    "lighthouse": "LHCI_CONFIG_FILE=.lighthouserc.local.json lhci autorun",
     "lighthouse:report": "node scripts/lighthouse-report.mjs",
     "lighthouse:report:hrnet": "node scripts/lighthouse-report-hrnet.mjs",
     "lighthouse:pdf": "node scripts/lighthouse-pdf.mjs",
