@@ -8,6 +8,8 @@ WealthHealth is a React 19 + TypeScript single-page application built with Vite.
 
 **Stack:** React 19 · TypeScript 6 · Vite 8 · React Router 7 · Plain CSS
 
+**Tooling:** pnpm 10 (see `packageManager` in `package.json`) · Node 24 (`.nvmrc`) · GitHub Actions (CI + Pages deploy)
+
 ---
 
 ## Project Structure
@@ -209,7 +211,7 @@ See the modal package repo for its own architecture and API docs.
 | Knip          | `knip.json`           | Unused files, exports, dependency drift     |
 | ESLint        | `eslint.config.js`    | React Hooks rules, import order             |
 | Stylelint     | `stylelint.config.js` | CSS property order                          |
-| Prettier      | `.prettierrc.json`    | Consistent formatting                       |
+| Prettier      | `prettier.config.js`  | Consistent formatting                       |
 | TypeScript    | strict mode           | Full type safety                            |
 
 **Lighthouse scores (React app):** Performance 0.82 · Accessibility 1.0 · Best Practices 1.0 · SEO 1.0

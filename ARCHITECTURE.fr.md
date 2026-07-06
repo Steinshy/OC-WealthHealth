@@ -8,6 +8,8 @@ WealthHealth est une application monopage React 19 + TypeScript construite avec 
 
 **Stack :** React 19 · TypeScript 6 · Vite 8 · React Router 7 · CSS classique
 
+**Outillage :** pnpm 10 (voir `packageManager` dans `package.json`) · Node 24 (`.nvmrc`) · GitHub Actions (CI + déploiement Pages)
+
 ---
 
 ## Structure du projet
@@ -209,7 +211,7 @@ Voir le dépôt du paquet modal pour son architecture et sa documentation d’AP
 | Knip          | `knip.json`           | Fichiers / exports inutilisés, dépendances      |
 | ESLint        | `eslint.config.js`    | Règles React Hooks, ordre des imports           |
 | Stylelint     | `stylelint.config.js` | Ordre des propriétés CSS                        |
-| Prettier      | `.prettierrc.json`    | Formatage homogène                              |
+| Prettier      | `prettier.config.js`  | Formatage homogène                              |
 | TypeScript    | mode strict           | Typage complet                                  |
 
 **Scores Lighthouse (app React) :** Performance 0,82 · Accessibilité 1,0 · Bonnes pratiques 1,0 · SEO 1,0
