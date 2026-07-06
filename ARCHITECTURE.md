@@ -67,7 +67,7 @@ src/
 │   └── states.ts               # Static data: US states list, departments list
 │
 └── types/
-    └── index.ts                # Shared TypeScript interfaces (Employee, State)
+    └── index.ts                # Shared interfaces (Employee, StoredEmployee, State)
 ```
 
 ---
@@ -169,12 +169,12 @@ Components are split into three layers:
 
 `src/helpers/validator.ts` is pure logic with no side effects. **`validateEmployee`** is the only public export; it runs zip, date-of-birth, and start-date checks internally and returns a `ValidationError[]` (the helper functions and `ValidationError` type stay module-private).
 
-| Concern            | Rule                                                       |
-| ------------------ | ---------------------------------------------------------- |
-| Zip                | Exactly 5 digits                                           |
-| Date of birth      | Must parse as a real date and be strictly before “now”     |
-| Start date         | Must be on or after date of birth (only checked if DOB OK) |
-| `validateEmployee` | Runs the above and aggregates any failures                 |
+| Concern            | Rule                                                   |
+| ------------------ | ------------------------------------------------------ |
+| Zip                | Exactly 5 digits                                       |
+| Date of birth      | Must parse as a real date and be strictly before “now” |
+| Start date         | Must be after date of birth (only checked if DOB OK)   |
+| `validateEmployee` | Runs the above and aggregates any failures             |
 
 `useEmployeeForm` calls `validateEmployee` on submit and maps the result into an error object keyed by field name, which `FormField` reads via its `error` prop.
 

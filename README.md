@@ -168,7 +168,6 @@ While the session lasts, employees are held in context. Each new record gets an 
 
 ```typescript
 export interface Employee {
-  id?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -178,6 +177,11 @@ export interface Employee {
   city: string;
   state: string;
   zipCode: string;
+}
+
+// As stored in context: the id is assigned on creation
+export interface StoredEmployee extends Employee {
+  id: string;
 }
 ```
 

@@ -15,6 +15,7 @@ interface FormFieldProps {
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
   ) => void;
   required?: boolean;
+  inputMode?: React.InputHTMLAttributes<HTMLInputElement>['inputMode'];
 }
 
 export const FormField = ({
@@ -26,6 +27,7 @@ export const FormField = ({
   value,
   onChange,
   required,
+  inputMode,
 }: FormFieldProps) => {
   return (
     <div className="form-group">
@@ -49,6 +51,7 @@ export const FormField = ({
           value={value}
           onChange={onChange}
           required={required}
+          inputMode={inputMode}
           hasError={!!error}
         />
       )}

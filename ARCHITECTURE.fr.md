@@ -67,7 +67,7 @@ src/
 │   └── states.ts               # Données statiques : États US, services
 │
 └── types/
-    └── index.ts                # Interfaces TypeScript partagées (Employee, State)
+    └── index.ts                # Interfaces partagées (Employee, StoredEmployee, State)
 ```
 
 ---
@@ -169,12 +169,12 @@ Trois niveaux principaux :
 
 `src/helpers/validator.ts` est une logique pure sans effet de bord. **`validateEmployee`** est le seul export public ; il exécute en interne les contrôles code postal, date de naissance et date d’entrée, et renvoie un `ValidationError[]` (les helpers et le type `ValidationError` restent privés au module).
 
-| Règle              | Contrainte                                                                  |
-| ------------------ | --------------------------------------------------------------------------- |
-| Code postal        | Exactement 5 chiffres                                                       |
-| Date de naissance  | Doit être une date valide et strictement avant « maintenant »               |
-| Date d’entrée      | Au même jour ou après la date de naissance (si la date de naissance est OK) |
-| `validateEmployee` | Exécute les contrôles ci-dessus et agrège les erreurs                       |
+| Règle              | Contrainte                                                              |
+| ------------------ | ----------------------------------------------------------------------- |
+| Code postal        | Exactement 5 chiffres                                                   |
+| Date de naissance  | Doit être une date valide et strictement avant « maintenant »           |
+| Date d’entrée      | Strictement après la date de naissance (si la date de naissance est OK) |
+| `validateEmployee` | Exécute les contrôles ci-dessus et agrège les erreurs                   |
 
 `useEmployeeForm` appelle `validateEmployee` à la soumission et projette le résultat dans un objet d’erreurs indexé par champ, lu par `FormField` via la prop `error`.
 

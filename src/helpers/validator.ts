@@ -38,7 +38,7 @@ const validateStartDate = (
   const startDateObj = new Date(startDate);
   const dobObj = new Date(dateOfBirth);
 
-  if (Number.isNaN(startDateObj.getTime()) || startDateObj < dobObj) {
+  if (Number.isNaN(startDateObj.getTime()) || startDateObj <= dobObj) {
     return {
       field: 'startDate',
       message: 'Start date must be after date of birth',

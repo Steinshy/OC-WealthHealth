@@ -169,7 +169,6 @@ Pendant la session, les employés sont conservés dans le contexte. Chaque nouve
 
 ```typescript
 export interface Employee {
-  id?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -179,6 +178,11 @@ export interface Employee {
   city: string;
   state: string;
   zipCode: string;
+}
+
+// Tel que stocké dans le contexte : l'id est attribué à la création
+export interface StoredEmployee extends Employee {
+  id: string;
 }
 ```
 

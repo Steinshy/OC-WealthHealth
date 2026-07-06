@@ -1,27 +1,16 @@
 import { SortableTh } from '@/components/patterns';
-import type { Employee } from '@/types';
+import type { StoredEmployee } from '@/types';
+import { EMPLOYEE_COLUMNS } from './columns';
 import './EmployeeTable.css';
 
 interface EmployeeTableProps {
-  employees: Employee[];
+  employees: StoredEmployee[];
   sortConfig: {
-    key: keyof Employee | null;
+    key: keyof StoredEmployee | null;
     direction: 'asc' | 'desc';
   };
-  onSort: (key: keyof Employee) => void;
+  onSort: (key: keyof StoredEmployee) => void;
 }
-
-const COLUMNS: { key: keyof Employee; label: string }[] = [
-  { key: 'firstName', label: 'First Name' },
-  { key: 'lastName', label: 'Last Name' },
-  { key: 'startDate', label: 'Start Date' },
-  { key: 'department', label: 'Department' },
-  { key: 'dateOfBirth', label: 'Date of Birth' },
-  { key: 'street', label: 'Street' },
-  { key: 'city', label: 'City' },
-  { key: 'state', label: 'State' },
-  { key: 'zipCode', label: 'Zip Code' },
-];
 
 export const EmployeeTable = ({
   employees,
@@ -34,7 +23,7 @@ export const EmployeeTable = ({
         <table className="employee-table">
           <thead>
             <tr>
-              {COLUMNS.map(({ key, label }) => (
+              {EMPLOYEE_COLUMNS.map(({ key, label }) => (
                 <SortableTh
                   key={key}
                   onClick={() => onSort(key)}

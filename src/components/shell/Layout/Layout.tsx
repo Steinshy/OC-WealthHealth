@@ -1,14 +1,15 @@
 import React from 'react';
-import { Link, useLocation } from 'react-router';
+import { NavLink } from 'react-router';
 import './Layout.css';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
-export const Layout = ({ children }: LayoutProps) => {
-  const location = useLocation();
+const navLinkClass = ({ isActive }: { isActive: boolean }) =>
+  `appbar-link${isActive ? ' appbar-link--active' : ''}`;
 
+export const Layout = ({ children }: LayoutProps) => {
   return (
     <div className="layout">
       <header className="appbar">
@@ -21,24 +22,15 @@ export const Layout = ({ children }: LayoutProps) => {
           <span className="appbar-name">WealthHealth</span>
         </div>
         <nav className="appbar-nav">
-          <Link
-            to="/"
-            className={`appbar-link${location.pathname === '/' ? ' appbar-link--active' : ''}`}
-          >
+          <NavLink to="/" end className={navLinkClass}>
             Home
-          </Link>
-          <Link
-            to="/create"
-            className={`appbar-link${location.pathname === '/create' ? ' appbar-link--active' : ''}`}
-          >
+          </NavLink>
+          <NavLink to="/create" className={navLinkClass}>
             Create
-          </Link>
-          <Link
-            to="/employees"
-            className={`appbar-link${location.pathname === '/employees' ? ' appbar-link--active' : ''}`}
-          >
+          </NavLink>
+          <NavLink to="/employees" className={navLinkClass}>
             Employees
-          </Link>
+          </NavLink>
         </nav>
       </header>
       <main className="layout-main">{children}</main>
