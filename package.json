@@ -44,7 +44,6 @@
     "@vitejs/plugin-react": "^6.0.1",
     "eslint": "^10.2.1",
     "eslint-config-prettier": "^10.1.8",
-    "eslint-plugin-import": "^2.32.0",
     "eslint-plugin-react-hooks": "^7.1.1",
     "eslint-plugin-react-refresh": "^0.5.2",
     "globals": "^17.4.0",
@@ -64,11 +63,6 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "puppeteer"
-    ],
-    "peerDependencyRules": {
-      "allowedVersions": {
-        "eslint-plugin-import>eslint": "^10"
-      }
-    }
+    ]
   }
 }

@@ -11,16 +11,16 @@ interface EmployeeTableProps {
   onSort: (key: keyof Employee) => void;
 }
 
-const SORT_KEYS: (keyof Employee)[] = [
-  'firstName',
-  'lastName',
-  'startDate',
-  'department',
-  'dateOfBirth',
-  'street',
-  'city',
-  'state',
-  'zipCode',
+const COLUMNS: { key: keyof Employee; label: string }[] = [
+  { key: 'firstName', label: 'First Name' },
+  { key: 'lastName', label: 'Last Name' },
+  { key: 'startDate', label: 'Start Date' },
+  { key: 'department', label: 'Department' },
+  { key: 'dateOfBirth', label: 'Date of Birth' },
+  { key: 'street', label: 'Street' },
+  { key: 'city', label: 'City' },
+  { key: 'state', label: 'State' },
+  { key: 'zipCode', label: 'Zip Code' },
 ];
 
 export const EmployeeTable = ({
@@ -34,24 +34,14 @@ export const EmployeeTable = ({
         <table className="employee-table">
           <thead>
             <tr>
-              {SORT_KEYS.map((key) => (
+              {COLUMNS.map(({ key, label }) => (
                 <SortableTh
                   key={key}
                   onClick={() => onSort(key)}
                   isActive={sortConfig.key === key}
                   direction={sortConfig.direction}
                 >
-                  {key === 'firstName'
-                    ? 'First Name'
-                    : key === 'lastName'
-                      ? 'Last Name'
-                      : key === 'startDate'
-                        ? 'Start Date'
-                        : key === 'dateOfBirth'
-                          ? 'Date of Birth'
-                          : key === 'zipCode'
-                            ? 'Zip Code'
-                            : key.charAt(0).toUpperCase() + key.slice(1)}
+                  {label}
                 </SortableTh>
               ))}
             </tr>

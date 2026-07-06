@@ -3,20 +3,22 @@ import { validateEmployee } from '@/helpers/validator';
 import type { Employee } from '@/types';
 import { useEmployees } from '@/context/EmployeeContext';
 
+const INITIAL_FORM_DATA: Employee = {
+  firstName: '',
+  lastName: '',
+  dateOfBirth: '',
+  startDate: '',
+  department: 'Sales',
+  street: '',
+  city: '',
+  state: 'AL',
+  zipCode: '',
+};
+
 export const useEmployeeForm = (onSuccessCallback?: () => void) => {
   const { addEmployee } = useEmployees();
   const [errors, setErrors] = useState<Record<string, string>>({});
-  const [formData, setFormData] = useState<Employee>({
-    firstName: '',
-    lastName: '',
-    dateOfBirth: '',
-    startDate: '',
-    department: 'Sales',
-    street: '',
-    city: '',
-    state: 'AL',
-    zipCode: '',
-  });
+  const [formData, setFormData] = useState<Employee>(INITIAL_FORM_DATA);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>,
@@ -30,17 +32,7 @@ export const useEmployeeForm = (onSuccessCallback?: () => void) => {
   };
 
   const resetForm = () => {
-    setFormData({
-      firstName: '',
-      lastName: '',
-      dateOfBirth: '',
-      startDate: '',
-      department: 'Sales',
-      street: '',
-      city: '',
-      state: 'AL',
-      zipCode: '',
-    });
+    setFormData(INITIAL_FORM_DATA);
     setErrors({});
   };
 
