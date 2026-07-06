@@ -26,7 +26,7 @@ const OUT_DIR = resolve('./lighthouse-reports/app');
 const RUNS = 3;
 
 console.log('Building…');
-execSync('npm run build', { stdio: 'inherit' });
+execSync('pnpm run build', { stdio: 'inherit' });
 
 console.log('\nStarting preview server…');
 const viteBin = resolve('./node_modules/.bin/vite.cmd');

@@ -6,7 +6,7 @@
       "reportFilenamePattern": "lighthouse-report-%%PATHNAME%%-%%TIMESTAMP%%"
     },
     "collect": {
-      "startServerCommand": "npm run preview -- --port 4173",
+      "startServerCommand": "pnpm run preview --port 4173",
       "startServerReadyPattern": "Local:",
       "url": ["http://localhost:4173/", "http://localhost:4173/employees"],
       "numberOfRuns": 3,
