@@ -42,15 +42,15 @@ OpenClassrooms **HRnet** migration: a React + TypeScript SPA to create and list 
 
 ## Prerequisites
 
-- **Node.js** >= 22 (see `engines` in `package.json`)
-- **npm** 9+ recommended
+- **Node.js** >= 22 (see `engines` in `package.json`; `.nvmrc` pins 24)
+- **pnpm** 10+ — enable via [Corepack](https://nodejs.org/api/corepack.html) (`corepack enable`) or install from [pnpm.io](https://pnpm.io/installation)
 
 ## Install
 
 ```bash
 git clone https://github.com/Steinshy/OC-WealthHealth.git
 cd OC-WealthHealth
-npm install
+pnpm install
 ```
 
 ## Quick Start
@@ -58,7 +58,7 @@ npm install
 ### Development server
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 The app is served at **http://localhost:5173** (see `vite.config.ts`).
@@ -66,8 +66,8 @@ The app is served at **http://localhost:5173** (see `vite.config.ts`).
 ### Production build and preview
 
 ```bash
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
 
 Preview defaults to **http://localhost:3000**.
@@ -121,6 +121,7 @@ export const Create = () => {
 | `/`          | Home — entry hero and navigation to create/list |
 | `/create`    | Create employee form + success modal            |
 | `/employees` | Searchable, sortable, paginated employee table  |
+| `*`          | Page not found (404)                            |
 
 ## Project structure
 
@@ -138,7 +139,8 @@ src/
 │   └── ui/                # Button, TextInput, Select, …
 ├── pages/
 │   ├── Home/
-│   └── employees/         # Create, List
+│   ├── NotFound/          # 404 catch-all
+│   └── employees/         # Create, List (lazy-loaded routes)
 ├── hooks/                  # useFilter, useSortableData, usePagination, …
 ├── helpers/
 │   └── validator.ts       # Form validation rules
@@ -148,19 +150,19 @@ src/
     └── states.ts          # US states list and departments
 ```
 
-## npm scripts
+## pnpm scripts
 
-| Script                            | Description                                     |
-| --------------------------------- | ----------------------------------------------- |
-| `npm run dev`                     | Vite dev server (port 5173)                     |
-| `npm run build`                   | Typecheck + production bundle to `dist/`        |
-| `npm run preview`                 | Serve `dist/` (port 3000)                       |
-| `npm run type-check`              | `tsc --noEmit` only                             |
-| `npm run lint`                    | ESLint                                          |
-| `npm run lint:styles`             | Stylelint                                       |
-| `npm run format` / `format:check` | Prettier                                        |
-| `npm run knip`                    | Unused files, exports, and dependency check     |
-| `npm run lighthouse`              | Lighthouse CI (uses `.lighthouserc.local.json`) |
+| Script                             | Description                                     |
+| ---------------------------------- | ----------------------------------------------- |
+| `pnpm run dev`                     | Vite dev server (port 5173)                     |
+| `pnpm run build`                   | Typecheck + production bundle to `dist/`        |
+| `pnpm run preview`                 | Serve `dist/` (port 3000)                       |
+| `pnpm run type-check`              | `tsc --noEmit` only                             |
+| `pnpm run lint`                    | ESLint                                          |
+| `pnpm run lint:styles`             | Stylelint                                       |
+| `pnpm run format` / `format:check` | Prettier                                        |
+| `pnpm run knip`                    | Unused files, exports, and dependency check     |
+| `pnpm run lighthouse`              | Lighthouse CI (uses `.lighthouserc.local.json`) |
 
 ## Data model
 
@@ -168,7 +170,6 @@ While the session lasts, employees are held in context. Each new record gets an 
 
 ```typescript
 export interface Employee {
-  id?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -178,6 +179,11 @@ export interface Employee {
   city: string;
   state: string;
   zipCode: string;
+}
+
+// As stored in context: the id is assigned on creation
+export interface StoredEmployee extends Employee {
+  id: string;
 }
 ```
 
@@ -220,5 +226,9 @@ Component-scoped rules use co-located `*.css` files (not CSS Modules). Override 
 | Firefox | Latest |
 | Safari  | Latest |
 | Edge    | Latest |
+
+## License
+
+[MIT](./LICENSE)
 
 ---

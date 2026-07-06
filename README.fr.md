@@ -43,15 +43,15 @@ Migration **HRnet** OpenClassrooms : une SPA React + TypeScript pour créer et l
 
 ## Prérequis
 
-- **Node.js** >= 22 (voir `engines` dans `package.json`)
-- **npm** 9+ recommandé
+- **Node.js** >= 22 (voir `engines` dans `package.json` ; `.nvmrc` fixe la version 24)
+- **pnpm** 10+ — à activer via [Corepack](https://nodejs.org/api/corepack.html) (`corepack enable`) ou à installer depuis [pnpm.io](https://pnpm.io/installation)
 
 ## Installation
 
 ```bash
 git clone https://github.com/Steinshy/OC-WealthHealth.git
 cd OC-WealthHealth
-npm install
+pnpm install
 ```
 
 ## Démarrage rapide
@@ -59,7 +59,7 @@ npm install
 ### Serveur de développement
 
 ```bash
-npm run dev
+pnpm run dev
 ```
 
 L’application est servie sur **http://localhost:5173** (voir `vite.config.ts`).
@@ -67,8 +67,8 @@ L’application est servie sur **http://localhost:5173** (voir `vite.config.ts`)
 ### Build de production et prévisualisation
 
 ```bash
-npm run build
-npm run preview
+pnpm run build
+pnpm run preview
 ```
 
 La prévisualisation utilise par défaut **http://localhost:3000**.
@@ -122,6 +122,7 @@ export const Create = () => {
 | `/`          | Accueil — héros d’entrée et liens vers création / liste |
 | `/create`    | Formulaire de création + modal de succès                |
 | `/employees` | Tableau recherchable, triable et paginé                 |
+| `*`          | Page introuvable (404)                                  |
 
 ## Structure du projet
 
@@ -139,7 +140,8 @@ src/
 │   └── ui/                # Button, TextInput, Select, …
 ├── pages/
 │   ├── Home/
-│   └── employees/         # Create, List
+│   ├── NotFound/          # Page 404 (route joker)
+│   └── employees/         # Create, List (routes chargées à la demande)
 ├── hooks/                  # useFilter, useSortableData, usePagination, …
 ├── helpers/
 │   └── validator.ts       # Règles de validation du formulaire
@@ -149,19 +151,19 @@ src/
     └── states.ts          # Liste des États US et services
 ```
 
-## Scripts npm
+## Scripts pnpm
 
-| Script                            | Description                                        |
-| --------------------------------- | -------------------------------------------------- |
-| `npm run dev`                     | Serveur de dev Vite (port 5173)                    |
-| `npm run build`                   | Typecheck + bundle de production dans `dist/`      |
-| `npm run preview`                 | Sert `dist/` (port 3000)                           |
-| `npm run type-check`              | `tsc --noEmit` uniquement                          |
-| `npm run lint`                    | ESLint                                             |
-| `npm run lint:styles`             | Stylelint                                          |
-| `npm run format` / `format:check` | Prettier                                           |
-| `npm run knip`                    | Fichiers / exports inutilisés et dépendances       |
-| `npm run lighthouse`              | Lighthouse CI (fichier `.lighthouserc.local.json`) |
+| Script                             | Description                                        |
+| ---------------------------------- | -------------------------------------------------- |
+| `pnpm run dev`                     | Serveur de dev Vite (port 5173)                    |
+| `pnpm run build`                   | Typecheck + bundle de production dans `dist/`      |
+| `pnpm run preview`                 | Sert `dist/` (port 3000)                           |
+| `pnpm run type-check`              | `tsc --noEmit` uniquement                          |
+| `pnpm run lint`                    | ESLint                                             |
+| `pnpm run lint:styles`             | Stylelint                                          |
+| `pnpm run format` / `format:check` | Prettier                                           |
+| `pnpm run knip`                    | Fichiers / exports inutilisés et dépendances       |
+| `pnpm run lighthouse`              | Lighthouse CI (fichier `.lighthouserc.local.json`) |
 
 ## Modèle de données
 
@@ -169,7 +171,6 @@ Pendant la session, les employés sont conservés dans le contexte. Chaque nouve
 
 ```typescript
 export interface Employee {
-  id?: string;
   firstName: string;
   lastName: string;
   dateOfBirth: string;
@@ -179,6 +180,11 @@ export interface Employee {
   city: string;
   state: string;
   zipCode: string;
+}
+
+// Tel que stocké dans le contexte : l'id est attribué à la création
+export interface StoredEmployee extends Employee {
+  id: string;
 }
 ```
 
@@ -221,5 +227,9 @@ Les règles par composant sont dans des fichiers `*.css` adjacents (pas de CSS M
 | Firefox    | Dernière |
 | Safari     | Dernière |
 | Edge       | Dernière |
+
+## Licence
+
+[MIT](./LICENSE)
 
 ---

@@ -1,3 +1,3 @@
 export { EmployeeForm } from './components/EmployeeForm';
-export { EmployeeTable } from './components/EmployeeTable';
+export { EmployeeTable, EMPLOYEE_COLUMNS } from './components/EmployeeTable';
 export { EmployeeListControls } from './components/EmployeeListControls';

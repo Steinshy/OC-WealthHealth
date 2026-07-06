@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 export const usePagination = <T>(items: T[], pageSize: number) => {
   const [page, setPage] = useState(1);
@@ -6,7 +6,10 @@ export const usePagination = <T>(items: T[], pageSize: number) => {
   const totalPages = Math.ceil(items.length / pageSize);
   const startIndex = (page - 1) * pageSize;
   const endIndex = startIndex + pageSize;
-  const pageItems = items.slice(startIndex, endIndex);
+  const pageItems = useMemo(
+    () => items.slice(startIndex, endIndex),
+    [items, startIndex, endIndex],
+  );
 
   const next = () => {
     setPage((p) => Math.min(p + 1, totalPages));

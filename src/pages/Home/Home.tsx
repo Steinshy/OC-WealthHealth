@@ -1,7 +1,10 @@
 import { Link } from 'react-router';
+import { useDocumentTitle } from '@/hooks';
 import './Home.css';
 
 export const Home = () => {
+  useDocumentTitle('WealthHealth - Home');
+
   return (
     <div className="home">
       <div className="home-hero">

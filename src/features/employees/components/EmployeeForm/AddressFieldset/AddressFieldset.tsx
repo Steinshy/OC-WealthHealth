@@ -61,6 +61,7 @@ export const AddressFieldset = ({
       <FormField
         label="Zip Code"
         id="zipCode"
+        inputMode="numeric"
         value={formData.zipCode}
         onChange={onChange}
         required
