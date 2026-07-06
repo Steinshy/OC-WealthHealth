@@ -121,6 +121,7 @@ export const Create = () => {
 | `/`          | Home — entry hero and navigation to create/list |
 | `/create`    | Create employee form + success modal            |
 | `/employees` | Searchable, sortable, paginated employee table  |
+| `*`          | Page not found (404)                            |
 
 ## Project structure
 
@@ -138,7 +139,8 @@ src/
 │   └── ui/                # Button, TextInput, Select, …
 ├── pages/
 │   ├── Home/
-│   └── employees/         # Create, List
+│   ├── NotFound/          # 404 catch-all
+│   └── employees/         # Create, List (lazy-loaded routes)
 ├── hooks/                  # useFilter, useSortableData, usePagination, …
 ├── helpers/
 │   └── validator.ts       # Form validation rules

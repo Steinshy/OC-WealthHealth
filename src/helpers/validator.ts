@@ -5,6 +5,14 @@ interface ValidationError {
   message: string;
 }
 
+// Text fields that must contain more than whitespace ("required" alone accepts " ")
+const REQUIRED_TEXT_FIELDS: { field: keyof Employee; label: string }[] = [
+  { field: 'firstName', label: 'First name' },
+  { field: 'lastName', label: 'Last name' },
+  { field: 'street', label: 'Street' },
+  { field: 'city', label: 'City' },
+];
+
 // Validates zip code format (must be exactly 5 digits)
 const validateZipCode = (zipCode: string): ValidationError | null => {
   if (!/^\d{5}$/.test(zipCode)) {
@@ -50,6 +58,13 @@ const validateStartDate = (
 // Validates entire employee form and returns an array of validation errors (empty if valid)
 export const validateEmployee = (employee: Employee): ValidationError[] => {
   const errors: ValidationError[] = [];
+
+  // Validate required text fields
+  for (const { field, label } of REQUIRED_TEXT_FIELDS) {
+    if (!employee[field].trim()) {
+      errors.push({ field, message: `${label} is required` });
+    }
+  }
 
   // Validate zip code
   const zipError = validateZipCode(employee.zipCode);

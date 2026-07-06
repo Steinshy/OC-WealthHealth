@@ -122,6 +122,7 @@ export const Create = () => {
 | `/`          | Accueil — héros d’entrée et liens vers création / liste |
 | `/create`    | Formulaire de création + modal de succès                |
 | `/employees` | Tableau recherchable, triable et paginé                 |
+| `*`          | Page introuvable (404)                                  |
 
 ## Structure du projet
 
@@ -139,7 +140,8 @@ src/
 │   └── ui/                # Button, TextInput, Select, …
 ├── pages/
 │   ├── Home/
-│   └── employees/         # Create, List
+│   ├── NotFound/          # Page 404 (route joker)
+│   └── employees/         # Create, List (routes chargées à la demande)
 ├── hooks/                  # useFilter, useSortableData, usePagination, …
 ├── helpers/
 │   └── validator.ts       # Règles de validation du formulaire

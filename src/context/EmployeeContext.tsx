@@ -1,4 +1,10 @@
-import { createContext, useContext, useReducer } from 'react';
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useMemo,
+  useReducer,
+} from 'react';
 import type { Employee, StoredEmployee } from '@/types';
 
 type Action = { type: 'ADD_EMPLOYEE'; payload: Employee };
@@ -26,12 +32,17 @@ export const EmployeeProvider = ({
 }) => {
   const [employees, dispatch] = useReducer(reducer, []);
 
-  const addEmployee = (employee: Employee) => {
+  const addEmployee = useCallback((employee: Employee) => {
     dispatch({ type: 'ADD_EMPLOYEE', payload: employee });
-  };
+  }, []);
+
+  const value = useMemo(
+    () => ({ employees, addEmployee }),
+    [employees, addEmployee],
+  );
 
   return (
-    <EmployeeContext.Provider value={{ employees, addEmployee }}>
+    <EmployeeContext.Provider value={value}>
       {children}
     </EmployeeContext.Provider>
   );

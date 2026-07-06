@@ -36,13 +36,15 @@ format:check — all must pass. There is no test runner/test suite.
 
 ## Layout
 
-- `src/pages/` — route components (`/`, `/create`, `/employees`)
+- `src/pages/` — route components (`/`, `/create`, `/employees`, `*` 404);
+  all but Home are code-split with `React.lazy` in `App.tsx`
 - `src/features/employees/` — EmployeeForm, EmployeeTable, list controls
 - `src/components/ui/` — atoms (Button, TextInput, Select, …)
 - `src/components/patterns/` — molecules (FormField, Pagination, SortableTh, …)
-- `src/components/shell/` — Layout, PageTemplate
+- `src/components/shell/` — Layout, PageTemplate, ErrorBoundary
 - `src/context/EmployeeContext.tsx` — global employee state
-- `src/hooks/` — useEmployeeForm, useFilter, useSortableData, usePagination
+- `src/hooks/` — useEmployeeForm, useFilter, useSortableData, usePagination,
+  useDocumentTitle
 - `src/helpers/validator.ts` — pure form validation
 - `HRNet-original/` — the legacy jQuery app kept for reference; do not modify
 - `scripts/` — local Lighthouse reporting tools (not part of the app build)

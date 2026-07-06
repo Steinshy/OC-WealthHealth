@@ -26,7 +26,9 @@ src/
 ├── pages/
 │   ├── Home/
 │   │   └── Home.tsx            # Route "/" — landing page with CTAs
-│   └── employees/
+│   ├── NotFound/
+│   │   └── NotFound.tsx        # Route "*" — 404 catch-all
+│   └── employees/              # Lazy-loaded routes (React.lazy)
 │       ├── Create.tsx          # Route "/create" — employee creation form
 │       └── List.tsx            # Route "/employees" — employee table
 │
@@ -38,7 +40,7 @@ src/
 │           └── EmployeeListControls/  # Search + table info (counts)
 │
 ├── components/
-│   ├── shell/                  # Layout wrappers (Layout, PageTemplate)
+│   ├── shell/                  # Layout wrappers (Layout, PageTemplate, ErrorBoundary)
 │   ├── patterns/               # Composed UI patterns
 │   │   ├── FormField/          # Label + input/select/date + error message
 │   │   ├── Pagination/         # Prev/Next page controls
@@ -55,6 +57,7 @@ src/
 │   │   └── SortIndicator/
 │
 ├── hooks/
+│   ├── useDocumentTitle.ts     # Per-page document.title
 │   ├── useEmployeeForm.ts      # Form state, validation, submit handler
 │   ├── useFilter.ts            # Generic full-text search filter
 │   ├── usePagination.ts        # Page slice + navigation
@@ -80,10 +83,13 @@ main.tsx
         └── <App>
               └── <BrowserRouter>
                     └── <EmployeeProvider>   ← global employee state
-                          └── <Layout>
-                                ├── Route "/"           → <Home>
-                                ├── Route "/create"     → <Create>
-                                └── Route "/employees"  → <List>
+                          └── <ErrorBoundary>   ← catches render errors
+                                └── <Layout>
+                                      └── <Suspense>   ← lazy routes
+                                            ├── Route "/"           → <Home>
+                                            ├── Route "/create"     → <Create>
+                                            ├── Route "/employees"  → <List>
+                                            └── Route "*"           → <NotFound>
 ```
 
 ---
@@ -142,13 +148,14 @@ The three hooks compose in sequence — each receives the output of the previous
 
 ## Routing
 
-| Path         | Component  | Purpose               |
-| ------------ | ---------- | --------------------- |
-| `/`          | `<Home>`   | Landing page          |
-| `/create`    | `<Create>` | Create a new employee |
-| `/employees` | `<List>`   | View all employees    |
+| Path         | Component    | Purpose               |
+| ------------ | ------------ | --------------------- |
+| `/`          | `<Home>`     | Landing page          |
+| `/create`    | `<Create>`   | Create a new employee |
+| `/employees` | `<List>`     | View all employees    |
+| `*`          | `<NotFound>` | 404 catch-all         |
 
-Uses `BrowserRouter` with `basename={import.meta.env.BASE_URL}` for GitHub Pages deployment compatibility.
+Uses `BrowserRouter` with `basename={import.meta.env.BASE_URL}` for GitHub Pages deployment compatibility. `Create`, `List` and `NotFound` are code-split with `React.lazy`; only `Home` ships in the initial bundle.
 
 ---
 
@@ -171,6 +178,7 @@ Components are split into three layers:
 
 | Concern            | Rule                                                   |
 | ------------------ | ------------------------------------------------------ |
+| Required text      | First name, last name, street, city must be non-blank  |
 | Zip                | Exactly 5 digits                                       |
 | Date of birth      | Must parse as a real date and be strictly before “now” |
 | Start date         | Must be after date of birth (only checked if DOB OK)   |

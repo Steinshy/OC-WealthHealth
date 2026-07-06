@@ -26,7 +26,9 @@ src/
 ├── pages/
 │   ├── Home/
 │   │   └── Home.tsx            # Route "/" — page d’accueil avec CTA
-│   └── employees/
+│   ├── NotFound/
+│   │   └── NotFound.tsx        # Route "*" — page 404
+│   └── employees/              # Routes chargées à la demande (React.lazy)
 │       ├── Create.tsx          # Route "/create" — formulaire de création
 │       └── List.tsx            # Route "/employees" — tableau des employés
 │
@@ -38,7 +40,7 @@ src/
 │           └── EmployeeListControls/  # Recherche + infos de comptage
 │
 ├── components/
-│   ├── shell/                  # Gabarits de mise en page (Layout, PageTemplate)
+│   ├── shell/                  # Gabarits de mise en page (Layout, PageTemplate, ErrorBoundary)
 │   ├── patterns/               # Motifs d’interface composés
 │   │   ├── FormField/          # Libellé + input/select/date + message d’erreur
 │   │   ├── Pagination/         # Contrôles page précédente / suivante
@@ -55,6 +57,7 @@ src/
 │   │   └── SortIndicator/
 │
 ├── hooks/
+│   ├── useDocumentTitle.ts     # document.title par page
 │   ├── useEmployeeForm.ts      # État du formulaire, validation, soumission
 │   ├── useFilter.ts            # Filtre plein texte générique
 │   ├── usePagination.ts        # Tranche de page + navigation
@@ -80,10 +83,13 @@ main.tsx
         └── <App>
               └── <BrowserRouter>
                     └── <EmployeeProvider>   ← état employé global
-                          └── <Layout>
-                                ├── Route "/"           → <Home>
-                                ├── Route "/create"     → <Create>
-                                └── Route "/employees"  → <List>
+                          └── <ErrorBoundary>   ← capture les erreurs de rendu
+                                └── <Layout>
+                                      └── <Suspense>   ← routes différées
+                                            ├── Route "/"           → <Home>
+                                            ├── Route "/create"     → <Create>
+                                            ├── Route "/employees"  → <List>
+                                            └── Route "*"           → <NotFound>
 ```
 
 ---
@@ -142,13 +148,14 @@ Les trois hooks s’enchaînent : chacun reçoit la sortie du précédent. La re
 
 ## Routage
 
-| Chemin       | Composant  | Rôle                   |
-| ------------ | ---------- | ---------------------- |
-| `/`          | `<Home>`   | Page d’accueil         |
-| `/create`    | `<Create>` | Créer un employé       |
-| `/employees` | `<List>`   | Voir tous les employés |
+| Chemin       | Composant    | Rôle                   |
+| ------------ | ------------ | ---------------------- |
+| `/`          | `<Home>`     | Page d’accueil         |
+| `/create`    | `<Create>`   | Créer un employé       |
+| `/employees` | `<List>`     | Voir tous les employés |
+| `*`          | `<NotFound>` | Page 404 (joker)       |
 
-Utilise `BrowserRouter` avec `basename={import.meta.env.BASE_URL}` pour la compatibilité avec le déploiement GitHub Pages.
+Utilise `BrowserRouter` avec `basename={import.meta.env.BASE_URL}` pour la compatibilité avec le déploiement GitHub Pages. `Create`, `List` et `NotFound` sont découpés en chunks via `React.lazy` ; seul `Home` fait partie du bundle initial.
 
 ---
 
@@ -171,6 +178,7 @@ Trois niveaux principaux :
 
 | Règle              | Contrainte                                                              |
 | ------------------ | ----------------------------------------------------------------------- |
+| Texte requis       | Prénom, nom, rue et ville ne doivent pas être vides                     |
 | Code postal        | Exactement 5 chiffres                                                   |
 | Date de naissance  | Doit être une date valide et strictement avant « maintenant »           |
 | Date d’entrée      | Strictement après la date de naissance (si la date de naissance est OK) |

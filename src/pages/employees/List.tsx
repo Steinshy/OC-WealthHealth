@@ -1,4 +1,9 @@
-import { useFilter, useSortableData, usePagination } from '@/hooks';
+import {
+  useFilter,
+  useSortableData,
+  usePagination,
+  useDocumentTitle,
+} from '@/hooks';
 import { useEmployees } from '@/context/EmployeeContext';
 import { PageTemplate } from '@/components/shell';
 import { Pagination } from '@/components/patterns';
@@ -17,6 +22,7 @@ const SORT_OPTIONS: { dateKeys: (keyof StoredEmployee)[] } = {
 };
 
 export const List = () => {
+  useDocumentTitle('WealthHealth - Employees');
   const { employees } = useEmployees();
 
   // Compose hooks

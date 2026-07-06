@@ -3,6 +3,16 @@ import { validateEmployee } from '@/helpers/validator';
 import type { Employee } from '@/types';
 import { useEmployees } from '@/context/EmployeeContext';
 
+// Dates and selects hold fixed-format values; only free-text fields need trimming
+const trimTextFields = (data: Employee): Employee => ({
+  ...data,
+  firstName: data.firstName.trim(),
+  lastName: data.lastName.trim(),
+  street: data.street.trim(),
+  city: data.city.trim(),
+  zipCode: data.zipCode.trim(),
+});
+
 const INITIAL_FORM_DATA: Employee = {
   firstName: '',
   lastName: '',
@@ -40,7 +50,8 @@ export const useEmployeeForm = (onSuccessCallback?: () => void) => {
     e.preventDefault();
     setErrors({});
 
-    const validationErrors = validateEmployee(formData);
+    const employee = trimTextFields(formData);
+    const validationErrors = validateEmployee(employee);
 
     if (validationErrors.length > 0) {
       const errorMap = validationErrors.reduce(
@@ -54,7 +65,7 @@ export const useEmployeeForm = (onSuccessCallback?: () => void) => {
       return;
     }
 
-    addEmployee(formData);
+    addEmployee(employee);
     resetForm();
 
     if (onSuccessCallback) {

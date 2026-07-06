@@ -4,8 +4,10 @@ import { useNavigate } from 'react-router';
 import { Modal, useTheme } from '@steinshy/wealthhealth-modal';
 import { PageTemplate } from '@/components/shell';
 import { EmployeeForm } from '@/features/employees';
+import { useDocumentTitle } from '@/hooks';
 
 export const Create = () => {
+  useDocumentTitle('WealthHealth - Create Employee');
   const navigate = useNavigate();
   const [showModal, setShowModal] = useState(false);
   const { setTheme } = useTheme();
