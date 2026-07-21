@@ -3,7 +3,6 @@ import globals from 'globals';
 import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import prettier from 'eslint-config-prettier';
-import importPlugin from 'eslint-plugin-import';
 import tseslint from 'typescript-eslint';
 
 export default [
@@ -39,9 +38,6 @@ export default [
   },
   {
     files: ['src/**/*.{js,ts,tsx}'],
-    plugins: {
-      import: importPlugin,
-    },
     languageOptions: {
       ecmaVersion: 'latest',
       globals: { ...globals.browser },
@@ -60,7 +56,6 @@ export default [
           ignoreRestSiblings: true,
         },
       ],
-      'import/order': 'off',
     },
   },
   ...tseslint.configs.recommended,

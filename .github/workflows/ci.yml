@@ -2,10 +2,17 @@ name: CI
 
 on:
   push:
+    branches:
+      - main
+      - dev
   pull_request:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   quality:
@@ -17,27 +24,30 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v6
 
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+
       - name: Setup Node.js
         uses: actions/setup-node@v6
         with:
           node-version: '24'
-          cache: 'npm'
-          cache-dependency-path: package-lock.json
+          cache: 'pnpm'
+          cache-dependency-path: pnpm-lock.yaml
 
       - name: Install dependencies
-        run: npm ci
+        run: pnpm install --frozen-lockfile
 
       - name: Build project
-        run: npm run build
+        run: pnpm run build
 
       - name: Knip (unused exports, files, deps)
-        run: npm run knip
+        run: pnpm run knip
 
       - name: Lint TypeScript/React
-        run: npm run lint
+        run: pnpm run lint
 
       - name: Lint styles
-        run: npm run lint:styles
+        run: pnpm run lint:styles
 
       - name: Check formatting
-        run: npm run format:check
+        run: pnpm run format:check

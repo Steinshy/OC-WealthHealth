@@ -26,10 +26,13 @@ const OUT_DIR = resolve('./lighthouse-reports/app');
 const RUNS = 3;
 
 console.log('Building…');
-execSync('npm run build', { stdio: 'inherit' });
+execSync('pnpm run build', { stdio: 'inherit' });
 
 console.log('\nStarting preview server…');
-const viteBin = resolve('./node_modules/.bin/vite.cmd');
+const viteBin = resolve(
+  './node_modules/.bin',
+  process.platform === 'win32' ? 'vite.cmd' : 'vite',
+);
 const preview = spawn(`"${viteBin}" preview --port ${freePort}`, { shell: true, stdio: 'pipe' });
 
 await new Promise((resolveReady, reject) => {

@@ -3,12 +3,18 @@ import './Heading.css';
 interface HeadingProps {
   children: React.ReactNode;
   className?: string;
+  level?: 1 | 2 | 3;
 }
 
-export const Heading = ({ children, className = '' }: HeadingProps) => {
+export const Heading = ({
+  children,
+  className = '',
+  level = 1,
+}: HeadingProps) => {
+  const Tag = `h${level}` as const;
   return (
-    <h1 className={className ? `heading ${className}` : 'heading'}>
+    <Tag className={className ? `heading ${className}` : 'heading'}>
       {children}
-    </h1>
+    </Tag>
   );
 };

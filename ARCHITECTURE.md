@@ -8,6 +8,8 @@ WealthHealth is a React 19 + TypeScript single-page application built with Vite.
 
 **Stack:** React 19 · TypeScript 6 · Vite 8 · React Router 7 · Plain CSS
 
+**Tooling:** pnpm 10 (see `packageManager` in `package.json`) · Node 24 (`.nvmrc`) · GitHub Actions (CI + Pages deploy)
+
 ---
 
 ## Project Structure
@@ -24,7 +26,9 @@ src/
 ├── pages/
 │   ├── Home/
 │   │   └── Home.tsx            # Route "/" — landing page with CTAs
-│   └── employees/
+│   ├── NotFound/
+│   │   └── NotFound.tsx        # Route "*" — 404 catch-all
+│   └── employees/              # Lazy-loaded routes (React.lazy)
 │       ├── Create.tsx          # Route "/create" — employee creation form
 │       └── List.tsx            # Route "/employees" — employee table
 │
@@ -36,7 +40,7 @@ src/
 │           └── EmployeeListControls/  # Search + table info (counts)
 │
 ├── components/
-│   ├── shell/                  # Layout wrappers (Layout, PageTemplate)
+│   ├── shell/                  # Layout wrappers (Layout, PageTemplate, ErrorBoundary)
 │   ├── patterns/               # Composed UI patterns
 │   │   ├── FormField/          # Label + input/select/date + error message
 │   │   ├── Pagination/         # Prev/Next page controls
@@ -53,6 +57,7 @@ src/
 │   │   └── SortIndicator/
 │
 ├── hooks/
+│   ├── useDocumentTitle.ts     # Per-page document.title
 │   ├── useEmployeeForm.ts      # Form state, validation, submit handler
 │   ├── useFilter.ts            # Generic full-text search filter
 │   ├── usePagination.ts        # Page slice + navigation
@@ -65,7 +70,7 @@ src/
 │   └── states.ts               # Static data: US states list, departments list
 │
 └── types/
-    └── index.ts                # Shared TypeScript interfaces (Employee, State)
+    └── index.ts                # Shared interfaces (Employee, StoredEmployee, State)
 ```
 
 ---
@@ -78,10 +83,13 @@ main.tsx
         └── <App>
               └── <BrowserRouter>
                     └── <EmployeeProvider>   ← global employee state
-                          └── <Layout>
-                                ├── Route "/"           → <Home>
-                                ├── Route "/create"     → <Create>
-                                └── Route "/employees"  → <List>
+                          └── <ErrorBoundary>   ← catches render errors
+                                └── <Layout>
+                                      └── <Suspense>   ← lazy routes
+                                            ├── Route "/"           → <Home>
+                                            ├── Route "/create"     → <Create>
+                                            ├── Route "/employees"  → <List>
+                                            └── Route "*"           → <NotFound>
 ```
 
 ---
@@ -140,13 +148,14 @@ The three hooks compose in sequence — each receives the output of the previous
 
 ## Routing
 
-| Path         | Component  | Purpose               |
-| ------------ | ---------- | --------------------- |
-| `/`          | `<Home>`   | Landing page          |
-| `/create`    | `<Create>` | Create a new employee |
-| `/employees` | `<List>`   | View all employees    |
+| Path         | Component    | Purpose               |
+| ------------ | ------------ | --------------------- |
+| `/`          | `<Home>`     | Landing page          |
+| `/create`    | `<Create>`   | Create a new employee |
+| `/employees` | `<List>`     | View all employees    |
+| `*`          | `<NotFound>` | 404 catch-all         |
 
-Uses `BrowserRouter` with `basename={import.meta.env.BASE_URL}` for GitHub Pages deployment compatibility.
+Uses `BrowserRouter` with `basename={import.meta.env.BASE_URL}` for GitHub Pages deployment compatibility. `Create`, `List` and `NotFound` are code-split with `React.lazy`; only `Home` ships in the initial bundle.
 
 ---
 
@@ -167,12 +176,13 @@ Components are split into three layers:
 
 `src/helpers/validator.ts` is pure logic with no side effects. **`validateEmployee`** is the only public export; it runs zip, date-of-birth, and start-date checks internally and returns a `ValidationError[]` (the helper functions and `ValidationError` type stay module-private).
 
-| Concern            | Rule                                                       |
-| ------------------ | ---------------------------------------------------------- |
-| Zip                | Exactly 5 digits                                           |
-| Date of birth      | Must parse as a real date and be strictly before “now”     |
-| Start date         | Must be on or after date of birth (only checked if DOB OK) |
-| `validateEmployee` | Runs the above and aggregates any failures                 |
+| Concern            | Rule                                                   |
+| ------------------ | ------------------------------------------------------ |
+| Required text      | First name, last name, street, city must be non-blank  |
+| Zip                | Exactly 5 digits                                       |
+| Date of birth      | Must parse as a real date and be strictly before “now” |
+| Start date         | Must be after date of birth (only checked if DOB OK)   |
+| `validateEmployee` | Runs the above and aggregates any failures             |
 
 `useEmployeeForm` calls `validateEmployee` on submit and maps the result into an error object keyed by field name, which `FormField` reads via its `error` prop.
 
@@ -209,7 +219,7 @@ See the modal package repo for its own architecture and API docs.
 | Knip          | `knip.json`           | Unused files, exports, dependency drift     |
 | ESLint        | `eslint.config.js`    | React Hooks rules, import order             |
 | Stylelint     | `stylelint.config.js` | CSS property order                          |
-| Prettier      | `.prettierrc.json`    | Consistent formatting                       |
+| Prettier      | `prettier.config.js`  | Consistent formatting                       |
 | TypeScript    | strict mode           | Full type safety                            |
 
 **Lighthouse scores (React app):** Performance 0.82 · Accessibility 1.0 · Best Practices 1.0 · SEO 1.0

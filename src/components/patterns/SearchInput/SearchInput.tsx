@@ -20,6 +20,7 @@ export const SearchInput = ({
       <input
         type="text"
         placeholder="Search employees..."
+        aria-label="Search employees"
         className="search-input"
         onChange={handleChange}
         {...props}
