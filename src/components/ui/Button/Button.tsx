@@ -13,7 +13,11 @@ export const Button = ({
 }: ButtonProps) => {
   const variantClass = variant === 'primary' ? 'btn-primary' : 'btn-secondary';
   return (
-    <button className={`btn ${variantClass} ${className}`} {...props}>
+    <button
+      type="button"
+      className={`btn ${variantClass} ${className}`}
+      {...props}
+    >
       {children}
     </button>
   );

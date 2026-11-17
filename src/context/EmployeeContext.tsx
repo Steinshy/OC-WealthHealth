@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useMemo,
-  useReducer,
-} from 'react';
+import { createContext, useCallback, use, useMemo, useReducer } from 'react';
 import type { Employee, StoredEmployee } from '@/types';
 
 type Action = { type: 'ADD_EMPLOYEE'; payload: Employee };
@@ -41,15 +35,11 @@ export const EmployeeProvider = ({
     [employees, addEmployee],
   );
 
-  return (
-    <EmployeeContext.Provider value={value}>
-      {children}
-    </EmployeeContext.Provider>
-  );
+  return <EmployeeContext value={value}>{children}</EmployeeContext>;
 };
 
 export const useEmployees = (): EmployeeContextValue => {
-  const ctx = useContext(EmployeeContext);
+  const ctx = use(EmployeeContext);
   if (!ctx)
     throw new Error('useEmployees must be used within EmployeeProvider');
   return ctx;
